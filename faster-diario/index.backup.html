@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Escala FASTER Diario</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Montserrat:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-teal: #1ABC9C;
+      --accent-teal: #4FB6AC;
+      --dark-charcoal: #1F2A2E;
+      --medium-slate: #2F3E46;
+      --bg: #F4F6F7;
+      --divider: #E4E8EA;
+      --card-bg: #fff;
+      --radius: 12px;
+      --btn-min-height: 2.75rem;
+      --font-title-brush: "Caveat Brush", cursive;
+      --font-headline: "Oswald", sans-serif;
+      --font-body: "Montserrat", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: var(--font-body);
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1rem;
+      padding-top: calc(1rem + env(safe-area-inset-top, 0px));
+      text-align: left;
+      background: var(--bg);
+      color: var(--dark-charcoal);
+    }
+    h1#app-title, #app-title {
+      font-family: var(--font-title-brush);
+      color: var(--dark-charcoal);
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    h1:not(#app-title), .step h2, #step-resumen .resumen-pilar h3 {
+      font-family: var(--font-headline);
+      color: var(--dark-charcoal);
+    }
+    h1 { margin-bottom: 1.5rem; }
+    .step {
+      display: none;
+      background: var(--card-bg);
+      padding: 1.25rem;
+      border-radius: var(--radius);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      border: 1px solid var(--divider);
+    }
+    .step.active { display: block; }
+    .step h2 { margin-top: 0; font-size: 1.25rem; }
+    .step .description {
+      color: var(--dark-charcoal);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      font-family: var(--font-body);
+    }
+    #step-inicio .description { margin-bottom: 1.25rem; }
+    #step-inicio #btn-iniciar { padding: 0.5rem 1.5rem; font-size: 1rem; min-height: var(--btn-min-height); }
+    .faster-acronym { margin: 1rem 0; }
+    .faster-letter {
+      font-family: var(--font-headline);
+      margin: 0.75rem 0 0.25rem 0;
+      font-size: 1rem;
+      color: var(--dark-charcoal);
+    }
+    .faster-significado {
+      margin: 0 0 0.5rem 0;
+      padding-left: 0.5rem;
+      color: var(--dark-charcoal);
+      font-size: 0.9rem;
+      font-family: var(--font-body);
+    }
+    .resumen-block { margin-bottom: 1rem; }
+    .resumen-block .resumen-title { font-weight: 600; margin-bottom: 0.25rem; font-family: var(--font-body); }
+    .resumen-block .resumen-value { margin: 0; color: var(--dark-charcoal); font-family: var(--font-body); }
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .checkbox-row input[type="checkbox"] { margin-top: 0.35rem; flex-shrink: 0; }
+    .checkbox-row label { flex: 1; text-align: left; font-family: var(--font-body); }
+    .poderoso-btn {
+      flex-shrink: 0;
+      padding: 0 0.5rem;
+      min-height: var(--btn-min-height);
+      font-size: 1rem;
+      line-height: 1;
+      cursor: pointer;
+      background: var(--primary-teal);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      min-width: 2rem;
+      font-family: var(--font-body);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .poderoso-btn:hover { opacity: 0.9; background: var(--accent-teal); }
+    .poderoso-label-icon { margin-left: 0.25rem; font-size: 1rem; vertical-align: middle; }
+    .textarea-group { margin-top: 1rem; }
+    .textarea-group label {
+      display: block;
+      margin-top: 0.75rem;
+      font-weight: 500;
+      text-align: left;
+      font-family: var(--font-body);
+      color: var(--dark-charcoal);
+    }
+    .textarea-group textarea {
+      width: 100%;
+      min-height: 60px;
+      padding: 0.5rem;
+      margin-top: 0.25rem;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      border: 1px solid var(--divider);
+      border-radius: var(--radius);
+      background: var(--card-bg);
+      color: var(--dark-charcoal);
+    }
+    .nav-buttons {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-buttons-left { display: flex; gap: 0.75rem; flex-shrink: 0; }
+    .nav-buttons button {
+      padding: 0.5rem 1rem;
+      min-height: var(--btn-min-height);
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: var(--radius);
+      border: none;
+      background: var(--primary-teal);
+      color: #fff;
+      font-family: var(--font-body);
+      box-sizing: border-box;
+    }
+    .nav-buttons button.secondary {
+      background: transparent;
+      color: var(--primary-teal);
+      border: 2px solid var(--primary-teal);
+    }
+    .nav-buttons button:hover { opacity: 0.9; }
+    .nav-buttons button.secondary:hover { background: rgba(26, 188, 156, 0.08); }
+    #step-resumen .resumen-pilar {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--divider);
+    }
+    #step-resumen .resumen-pilar:last-child { border-bottom: none; }
+    #step-resumen .resumen-pilar h3 { margin: 0 0 0.5rem 0; font-size: 1.1rem; }
+    #step-resumen .resumen-pilar ul { margin: 0.25rem 0; padding-left: 1.25rem; }
+    #step-resumen .resumen-block .resumen-value { margin-top: 0; }
+    .historial-list { margin-top: 0.5rem; }
+    .historial-item {
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      text-align: left;
+      border: 1px solid var(--divider);
+    }
+    .historial-item .fecha { font-weight: 600; font-family: var(--font-body); color: var(--dark-charcoal); }
+    .historial-item.record-link { cursor: pointer; }
+    .historial-item.record-link:hover { background: var(--divider); }
+    .historial-item .export-check-wrap { margin-right: 0.5rem; }
+    .historial-item .export-check-wrap input { cursor: pointer; }
+    #historial-panel .registro-detalle-pilar {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--divider);
+    }
+    #historial-panel .registro-detalle-pilar:last-child { border-bottom: none; }
+    .pilares-list { margin: 1rem 0; }
+    .pilares-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      padding: 0.5rem 0;
+    }
+    .pilares-item .pillar-link { color: var(--primary-teal); text-decoration: none; font-family: var(--font-body); }
+    .pilares-item .pillar-link:hover { text-decoration: underline; }
+    .pilares-icon { font-weight: bold; min-width: 1.25rem; display: inline-block; text-align: center; }
+    .pilares-icon.filled { color: var(--primary-teal); }
+    .pilares-icon.optional { color: var(--medium-slate); }
+    .pilares-icon.missing { color: #c0392b; }
+    .validation-msg {
+      color: var(--medium-slate);
+      background: rgba(47, 62, 70, 0.08);
+      padding: 0.75rem;
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      font-family: var(--font-body);
+      border: 1px solid var(--divider);
+    }
+    .message-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      padding-top: calc(1rem + env(safe-area-inset-top, 0px));
+      box-sizing: border-box;
+    }
+    .message-overlay.is-visible { display: flex; }
+    .message-overlay .message-box {
+      display: block;
+      margin: 0;
+      max-width: 100%;
+      max-height: 90vh;
+      overflow: auto;
+      border-radius: var(--radius);
+    }
+    .message-box {
+      padding: 1.25rem;
+      border: 2px solid var(--divider);
+      border-radius: var(--radius);
+      background: var(--card-bg);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .message-box.is-error { border-color: #c0392b; }
+    .message-box p { margin: 0 0 0.75rem 0; font-family: var(--font-body); color: var(--dark-charcoal); }
+    .message-box .message-box-close {
+      padding: 0.5rem 0.75rem;
+      min-height: var(--btn-min-height);
+      cursor: pointer;
+      border: none;
+      border-radius: var(--radius);
+      background: var(--primary-teal);
+      color: #fff;
+      font-family: var(--font-body);
+      box-sizing: border-box;
+    }
+    .message-box .message-box-close:hover { opacity: 0.9; background: var(--accent-teal); }
+    .confirm-box {
+      display: none;
+      padding: 1.25rem;
+      border: 2px solid var(--divider);
+      border-radius: var(--radius);
+      background: var(--card-bg);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 100%;
+    }
+    .confirm-box p { margin: 0 0 1rem 0; font-family: var(--font-body); color: var(--dark-charcoal); }
+    .confirm-box .confirm-buttons { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .confirm-box .confirm-buttons button {
+      padding: 0.5rem 1rem;
+      min-height: var(--btn-min-height);
+      cursor: pointer;
+      border-radius: var(--radius);
+      border: none;
+      font-size: 1rem;
+      font-family: var(--font-body);
+      box-sizing: border-box;
+    }
+    .confirm-box .btn-confirm-yes { background: #c0392b; color: #fff; }
+    .confirm-box .btn-confirm-yes:hover { opacity: 0.9; }
+    .confirm-box .btn-confirm-no { background: var(--medium-slate); color: #fff; }
+    .confirm-box .btn-confirm-no:hover { opacity: 0.9; }
+    .btn-borrar-todos { background: #c0392b !important; color: #fff !important; }
+    .btn-borrar-todos:hover { opacity: 0.9; }
+    .textarea-group textarea.validation-error { border-color: #c0392b; }
+  </style>
+</head>
+<body>
+  <h1 id="app-title">F.A.S.T.E.R.</h1>
+
+  <div id="wizard">
+    <!-- INICIO / BIENVENIDA -->
+    <div class="step" id="step-inicio">
+      <h2>¿Qué es F.A.S.T.E.R.?</h2>
+      <p class="description">La escala F.A.S.T.E.R. te ayuda a reconocer en qué punto te encuentras en tu camino de restauración. Cada letra representa una etapa de deterioro; la primera (Restauración) es el estado ideal. Revisa los pilares con honestidad para identificar áreas que necesitan atención.</p>
+      <div class="faster-acronym">
+        <p class="faster-letter"><strong>F — Forgetting Priorities</strong> (Olvidar prioridades)</p>
+        <p class="faster-significado">Es el inicio del deterioro espiritual. La persona comienza a descuidar su comunión con Dios y sus prioridades eternas. No hay caída abierta todavía, pero sí un desplazamiento interno: menos oración, menos vigilancia, más distracción y autosuficiencia.</p>
+        <p class="faster-letter"><strong>A — Anxiety</strong> (Ansiedad)</p>
+        <p class="faster-significado">Surge un ruido interno de preocupación y temor. La confianza práctica en Dios disminuye y los pensamientos comienzan a desordenarse. Aparecen resentimientos, especulación y tensión emocional.</p>
+        <p class="faster-letter"><strong>S — Speeding Up</strong> (Aceleración)</p>
+        <p class="faster-significado">Es la respuesta carnal a la ansiedad. En vez de detenerse y depender de Dios, la persona acelera: se ocupa en exceso, trabaja compulsivamente o llena su agenda para no enfrentar lo que siente. El hacer reemplaza el descansar en Dios.</p>
+        <p class="faster-letter"><strong>T — Ticked Off</strong> (Enojarse / Irritación constante)</p>
+        <p class="faster-significado">La frustración acumulada se transforma en ira. Hay reacciones exageradas, orgullo y defensividad. La persona se vuelve más crítica, menos paciente y más propensa a conflictos.</p>
+        <p class="faster-letter"><strong>E — Exhaustion</strong> (Agotamiento)</p>
+        <p class="faster-significado">Después de vivir en ansiedad, aceleración e ira, llega el colapso. Hay cansancio físico, emocional y espiritual. Se pierde el gozo y la claridad. Es un estado de vulnerabilidad extrema.</p>
+        <p class="faster-letter"><strong>R — Relapse</strong> (Recaída)</p>
+        <p class="faster-significado">Es el retorno a conductas pecaminosas o adictivas previamente abandonadas. La persona cede al deseo, pierde control y experimenta culpa y vergüenza. Es el resultado final del proceso descendente si no se interrumpe antes.</p>
+      </div>
+      <p class="description" style="margin-top: 1rem;"><strong>Cómo usar el programa:</strong> Recorre los pilares en orden. En cada uno marca las frases que describen tu situación, rellena «Comportamiento más poderoso» y las preguntas. Usa <strong>Atrás</strong> y <strong>Siguiente</strong>, o <strong>Fin</strong> para ir al resumen de pilares. El botón 💪 mueve esa frase a «Comportamiento más poderoso». Si rellenas un pilar, todos los anteriores también deben tener algo. <strong>Ver Resumen</strong> muestra el último pilar con datos y su consejo.</p>
+      <div class="nav-buttons" style="justify-content: center; margin-top: 2rem;">
+        <button type="button" id="btn-iniciar">Iniciar</button>
+        <button type="button" id="btn-ver-mis-registros-inicio">Ver mis registros</button>
+      </div>
+    </div>
+
+    <!-- RESTAURACIÓN -->
+    <div class="step" id="step-restauracion" data-pillar="Restauración">
+      <h2>Restauración</h2>
+      <p class="description">Es el estado de caminar en la luz: viviendo sin ocultar pecado, practicando confesión, obediencia, gratitud y comunión con Dios y con otros creyentes. Refleja una vida alineada con la verdad, donde hay responsabilidad, humildad y crecimiento continuo en santificación.</p>
+      <div class="checkboxes"></div>
+      <div class="textarea-group">
+        <label>Comportamiento más poderoso <span class="poderoso-label-icon" title="Mover a comportamiento más poderoso">💪</span></label>
+        <textarea name="poderoso" rows="2"></textarea>
+        <label>¿Cómo me afecta? ¿Cómo me siento en ese momento?</label>
+        <textarea name="q1" rows="2"></textarea>
+        <label>¿Cómo afecta a las personas importantes de mi vida?</label>
+        <textarea name="q2" rows="2"></textarea>
+        <label>¿Por qué lo hago? ¿Cuál es el beneficio para mí?</label>
+        <textarea name="q3" rows="2"></textarea>
+      </div>
+      <div class="nav-buttons">
+        <div class="nav-buttons-left">
+          <button type="button" class="back-btn">Atrás</button>
+          <button type="button" class="next-btn">Siguiente</button>
+        </div>
+        <button type="button" class="fin-btn">Fin</button>
+      </div>
+    </div>
+
+    <!-- OLVIDAR PRIORIDADES -->
+    <div class="step" id="step-olvidar" data-pillar="Olvidar prioridades">
+      <h2>Olvidar prioridades</h2>
+      <p class="description">Es el inicio del enfriamiento espiritual. El corazón comienza a desplazarse de Dios hacia preocupaciones temporales. Aparecen secretos, distracciones y autosuficiencia. No es todavía caída abierta, pero sí una desviación interna del primer amor.</p>
+      <div class="checkboxes"></div>
+      <div class="textarea-group">
+        <label>Comportamiento más poderoso <span class="poderoso-label-icon" title="Mover a comportamiento más poderoso">💪</span></label>
+        <textarea name="poderoso" rows="2"></textarea>
+        <label>¿Cómo me afecta? ¿Cómo me siento en ese momento?</label>
+        <textarea name="q1" rows="2"></textarea>
+        <label>¿Cómo afecta a las personas importantes de mi vida?</label>
+        <textarea name="q2" rows="2"></textarea>
+        <label>¿Por qué lo hago? ¿Cuál es el beneficio para mí?</label>
+        <textarea name="q3" rows="2"></textarea>
+      </div>
+      <div class="nav-buttons">
+        <div class="nav-buttons-left">
+          <button type="button" class="back-btn">Atrás</button>
+          <button type="button" class="next-btn">Siguiente</button>
+        </div>
+        <button type="button" class="fin-btn">Fin</button>
+      </div>
+    </div>
+
+    <!-- ANSIEDAD -->
+    <div class="step" id="step-ansiedad" data-pillar="Ansiedad">
+      <h2>Ansiedad</h2>
+      <p class="description">Es un estado donde el corazón pierde descanso en la soberanía de Dios y comienza a ser dominado por temor, pensamientos desordenados y emociones intensas. Refleja una pérdida práctica de confianza en el carácter y control providencial de Dios.</p>
+      <div class="checkboxes"></div>
+      <div class="textarea-group">
+        <label>Comportamiento más poderoso <span class="poderoso-label-icon" title="Mover a comportamiento más poderoso">💪</span></label>
+        <textarea name="poderoso" rows="2"></textarea>
+        <label>¿Cómo me afecta? ¿Cómo me siento en ese momento?</label>
+        <textarea name="q1" rows="2"></textarea>
+        <label>¿Cómo afecta a las personas importantes de mi vida?</label>
+        <textarea name="q2" rows="2"></textarea>
+        <label>¿Por qué lo hago? ¿Cuál es el beneficio para mí?</label>
+        <textarea name="q3" rows="2"></textarea>
+      </div>
+      <div class="nav-buttons">
+        <div class="nav-buttons-left">
+          <button type="button" class="back-btn">Atrás</button>
+          <button type="button" class="next-btn">Siguiente</button>
+        </div>
+        <button type="button" class="fin-btn">Fin</button>
+      </div>
+    </div>
+
+    <!-- ACELERACIÓN -->
+    <div class="step" id="step-aceleracion" data-pillar="Aceleración">
+      <h2>Aceleración</h2>
+      <p class="description">Es una respuesta carnal a la ansiedad: hiperactividad, autosuficiencia y esfuerzo desmedido para controlar resultados. El hacer reemplaza el depender, y se pierde el descanso en Dios.</p>
+      <div class="checkboxes"></div>
+      <div class="textarea-group">
+        <label>Comportamiento más poderoso <span class="poderoso-label-icon" title="Mover a comportamiento más poderoso">💪</span></label>
+        <textarea name="poderoso" rows="2"></textarea>
+        <label>¿Cómo me afecta? ¿Cómo me siento en ese momento?</label>
+        <textarea name="q1" rows="2"></textarea>
+        <label>¿Cómo afecta a las personas importantes de mi vida?</label>
+        <textarea name="q2" rows="2"></textarea>
+        <label>¿Por qué lo hago? ¿Cuál es el beneficio para mí?</label>
+        <textarea name="q3" rows="2"></textarea>
+      </div>
+      <div class="nav-buttons">
+        <div class="nav-buttons-left">
+          <button type="button" class="back-btn">Atrás</button>
+          <button type="button" class="next-btn">Siguiente</button>
+        </div>
+        <button type="button" class="fin-btn">Fin</button>
+      </div>
+    </div>
+
+    <!-- ENOJARSE -->
+    <div class="step" id="step-enojarse" data-pillar="Enojarse">
+      <h2>Enojarse</h2>
+      <p class="description">Es cuando el orgullo y la frustración toman control. La ira pecaminosa reemplaza la mansedumbre, y el corazón se endurece. Se busca tener la razón más que reflejar el carácter de Cristo.</p>
+      <div class="checkboxes"></div>
+      <div class="textarea-group">
+        <label>Comportamiento más poderoso <span class="poderoso-label-icon" title="Mover a comportamiento más poderoso">💪</span></label>
+        <textarea name="poderoso" rows="2"></textarea>
+        <label>¿Cómo me afecta? ¿Cómo me siento en ese momento?</label>
+        <textarea name="q1" rows="2"></textarea>
+        <label>¿Cómo afecta a las personas importantes de mi vida?</label>
+        <textarea name="q2" rows="2"></textarea>
+        <label>¿Por qué lo hago? ¿Cuál es el beneficio para mí?</label>
+        <textarea name="q3" rows="2"></textarea>
+      </div>
+      <div class="nav-buttons">
+        <div class="nav-buttons-left">
+          <button type="button" class="back-btn">Atrás</button>
+          <button type="button" class="next-btn">Siguiente</button>
+        </div>
+        <button type="button" class="fin-btn">Fin</button>
+      </div>
+    </div>
+
+    <!-- AGOTAMIENTO -->
+    <div class="step" id="step-agotamiento" data-pillar="Agotamiento">
+      <h2>Agotamiento</h2>
+      <p class="description">Es la consecuencia de vivir en tensión prolongada fuera del descanso en Dios. Hay pérdida de gozo y esperanza, y la persona funciona en modo supervivencia, vulnerable a recaer en patrones antiguos.</p>
+      <div class="checkboxes"></div>
+      <div class="textarea-group">
+        <label>Comportamiento más poderoso <span class="poderoso-label-icon" title="Mover a comportamiento más poderoso">💪</span></label>
+        <textarea name="poderoso" rows="2"></textarea>
+        <label>¿Cómo me afecta? ¿Cómo me siento en ese momento?</label>
+        <textarea name="q1" rows="2"></textarea>
+        <label>¿Cómo afecta a las personas importantes de mi vida?</label>
+        <textarea name="q2" rows="2"></textarea>
+        <label>¿Por qué lo hago? ¿Cuál es el beneficio para mí?</label>
+        <textarea name="q3" rows="2"></textarea>
+      </div>
+      <div class="nav-buttons">
+        <div class="nav-buttons-left">
+          <button type="button" class="back-btn">Atrás</button>
+          <button type="button" class="next-btn">Siguiente</button>
+        </div>
+        <button type="button" class="fin-btn">Fin</button>
+      </div>
+    </div>
+
+    <!-- RECAÍDA -->
+    <div class="step" id="step-recaida" data-pillar="Recaída">
+      <h2>Recaída</h2>
+      <p class="description">Es el retorno consciente a patrones de pecado previamente abandonados. Implica ceder al deseo, tomar control independiente de Dios y experimentar culpa y vergüenza renovadas.</p>
+      <div class="checkboxes"></div>
+      <div class="textarea-group">
+        <label>Comportamiento más poderoso <span class="poderoso-label-icon" title="Mover a comportamiento más poderoso">💪</span></label>
+        <textarea name="poderoso" rows="2"></textarea>
+        <label>¿Cómo me afecta? ¿Cómo me siento en ese momento?</label>
+        <textarea name="q1" rows="2"></textarea>
+        <label>¿Cómo afecta a las personas importantes de mi vida?</label>
+        <textarea name="q2" rows="2"></textarea>
+        <label>¿Por qué lo hago? ¿Cuál es el beneficio para mí?</label>
+        <textarea name="q3" rows="2"></textarea>
+      </div>
+      <div class="nav-buttons">
+        <div class="nav-buttons-left">
+          <button type="button" class="back-btn">Atrás</button>
+          <button type="button" class="finalizar-btn">Finalizar</button>
+        </div>
+        <button type="button" class="fin-btn">Fin</button>
+      </div>
+    </div>
+
+    <!-- PILARES (filled/unfilled overview before Resumen) -->
+    <div class="step" id="step-pilares">
+      <h2>Pilares</h2>
+      <p class="description">Revisa qué pilares tienen información. Puedes ir a cualquiera para completar o editar.</p>
+      <div id="pilares-list" class="pilares-list"></div>
+      <div class="nav-buttons">
+        <button type="button" class="back-btn">Atrás</button>
+        <button type="button" id="btn-ver-resumen">Ver Resumen</button>
+      </div>
+    </div>
+
+    <!-- RESUMEN -->
+    <div class="step" id="step-resumen">
+      <h2 id="resumen-title">Resumen</h2>
+      <div id="resumen-content"></div>
+      <div class="nav-buttons">
+        <button type="button" id="btn-empezar-de-nuevo">Empezar de Nuevo</button>
+        <button type="button" id="btn-ver-mis-registros-resumen">Ver mis registros</button>
+      </div>
+    </div>
+
+    <!-- HISTORIAL (listado y detalle de registros guardados) -->
+    <div class="step" id="step-historial">
+      <h2>Mis registros</h2>
+      <div id="historial-panel"></div>
+      <div class="nav-buttons">
+        <button type="button" id="btn-historial-back">Volver</button>
+        <button type="button" id="btn-historial-exportar">Exportar HTML</button>
+        <button type="button" id="btn-historial-borrar" class="btn-borrar-todos">Borrar todos</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="message-overlay" class="message-overlay">
+    <div id="message-box" class="message-box">
+      <p id="message-box-text"></p>
+      <button type="button" class="message-box-close" id="message-box-close">Cerrar</button>
+    </div>
+    <div id="confirm-box" class="confirm-box">
+      <p id="confirm-text"></p>
+      <div class="confirm-buttons">
+        <button type="button" id="btn-confirm-yes" class="message-box-close btn-confirm-yes">Sí, borrar todo</button>
+        <button type="button" id="btn-confirm-no" class="message-box-close btn-confirm-no">No, cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const PILLAR_ORDER = ['Restauración', 'Olvidar prioridades', 'Ansiedad', 'Aceleración', 'Enojarse', 'Agotamiento', 'Recaída'];
+    const PILLAR_IDS = ['restauracion', 'olvidar', 'ansiedad', 'aceleracion', 'enojarse', 'agotamiento', 'recaida'];
+
+    const CONSEJOS = {
+      'Restauración': 'Permanece en la Palabra diariamente, ora de manera constante, mantén comunión activa con otros creyentes y practica confesión inmediata cuando falles. La perseverancia en los medios de gracia (Escritura, oración, iglesia y rendición de cuentas) es lo que sostiene la restauración.',
+      'Olvidar prioridades': 'Reconoce la desviación y arrepiéntete deliberadamente. Restablece tiempos definidos de oración y Escritura, busca rendición de cuentas y elimina distracciones que compiten con tu comunión con Dios. La restauración comienza cuando vuelves a poner a Dios en primer lugar.',
+      'Ansiedad': 'Renueva tu mente con la verdad bíblica. Sustituye pensamientos especulativos por promesas claras de la Escritura. Ora entregando tus cargas a Dios con acción de gracias. La paz crece cuando la verdad gobierna la mente.',
+      'Aceleración': 'Practica reposo intencional. Reduce actividades innecesarias y establece tiempos de silencio, oración y reflexión bíblica. Recuerda que la fidelidad no se mide por actividad, sino por obediencia dependiente.',
+      'Enojarse': 'Confiesa el orgullo que alimenta la ira. Practica humildad deliberada y busca reconciliación rápida. Medita en la gracia que has recibido, y permite que esa misericordia moldee tu trato hacia otros.',
+      'Agotamiento': 'Vuelve a lo esencial: descanso físico adecuado, oración sincera y comunión con creyentes maduros. No intentes resolver todo de inmediato; prioriza restaurar tu relación con Dios y confiar en Su gracia sustentadora.',
+      'Recaída': 'No te escondas en la vergüenza. Confiesa inmediatamente, arrepiéntete genuinamente y elimina las fuentes de tentación. Aférrate al evangelio: hay perdón real y poder para levantarte nuevamente en obediencia.'
+    };
+
+    const CHECKBOXES = {
+      'Restauración': [
+        'Esta semana fui honesto conmigo mismo y con otros, sin secretos importantes',
+        'Trabajé activamente para resolver problemas pendientes',
+        'Identifiqué mis miedos y sentimientos y los enfrenté',
+        'Mantengo mis compromisos con reuniones, oración, familia y amigos',
+        'Practiqué la gratitud y la vulnerabilidad con los demás',
+        'Aumenté mi conexión y confianza en Dios y en personas significativas',
+        'Me mostré abierto, honesto y con contacto visual en interacciones importantes'
+      ],
+      'Olvidar prioridades': [
+        'He mantenido secretos que afectan mi vida espiritual o relaciones',
+        'He pasado menos tiempo o energía en oración, reuniones o actividades de la iglesia',
+        'He evitado a personas de apoyo o responsabilidad',
+        'He tenido conversaciones superficiales en lugar de profundas',
+        'He cambiado mis metas o prioridades importantes sin razón clara',
+        'He estado obsesionado con relaciones o asuntos materiales',
+        'He roto promesas o compromisos',
+        'He descuidado a mi familia o personas cercanas',
+        'He buscado controlar situaciones o a otras personas',
+        'Me he distraído con entretenimiento, TV, computadora u ocio excesivo',
+        'He mentido o exagerado para mejorar mi imagen frente a otros',
+        'He usado sarcasmo o actitudes pasivo-agresivas',
+        'Me he aislado emocionalmente de otros',
+        'He procrastinado asuntos importantes',
+        'He actuado con exceso de confianza minimizando riesgos',
+        'He sentido aburrimiento constante que me lleva a distraerme',
+        'He escondido dinero o información financiera',
+        'He negado problemas reales o he huido de conversaciones importantes'
+      ],
+      'Ansiedad': [
+        'Me he preocupado constantemente o he sentido miedo indefinido',
+        'He usado palabras groseras o he estado irritable',
+        'He sentido resentimiento hacia alguien',
+        'He juzgado las intenciones o motivos de otros',
+        'He intentado hacer metas o listas que no puedo cumplir',
+        'He "leído la mente" de otros sin evidencia',
+        'He fantaseado o intentado rescatar a otros de forma codependiente',
+        'He tenido problemas de concentración o sueño',
+        'He buscado o creado drama innecesario',
+        'He usado medicamentos sin receta (para dolor, sueño o control de peso)',
+        'He coqueteado inapropiadamente',
+        'He repetido viejos pensamientos negativos sobre mí o mi pasado',
+        'He actuado desde el perfeccionismo o miedo a equivocarme',
+        'He participado en chismes o conversaciones dañinas sobre otros'
+      ],
+      'Aceleración': [
+        'Me he mantenido súper ocupado para evitar mis emociones',
+        'He trabajado en exceso o me he sentido adicto al trabajo',
+        'He evitado relajarme o disminuir el ritmo',
+        'He sentido impulsividad o dificultad para apagar los pensamientos',
+        'He saltado comidas o he tenido atracones de comida',
+        'He gastado dinero en exceso',
+        'He tenido dificultad para identificar mis sentimientos o necesidades',
+        'He repetido pensamientos negativos constantemente',
+        'He estado irritable o con cambios de humor drásticos',
+        'He consumido demasiada cafeína o estimulantes',
+        'He hecho exceso de ejercicio',
+        'He tenido dificultad para estar solo o con otros',
+        'He puesto excusas para "hacerlo todo"',
+        'He sentido nerviosismo físico constante',
+        'He tenido dificultad real para escuchar a los demás con atención'
+      ],
+      'Enojarse': [
+        'He procrastinado causando problemas en trabajo, dinero o relaciones',
+        'He aumentado el sarcasmo o comentarios hirientes',
+        'He pensado en términos "todo o nada"',
+        'Me he sentido solo o incomprendido',
+        'He reaccionado exageradamente o con rabia',
+        'He tenido resentimientos constantes',
+        'He alejado a otros o aumentado mi aislamiento',
+        'He culpado a otros o discutido',
+        'He tenido pensamiento irracional o no he aceptado críticas',
+        'He estado a la defensiva o necesitado tener la razón',
+        'He tenido problemas físicos por estrés (dolor de cabeza, digestión)',
+        'He tenido pensamientos obsesivos o dificultad para perdonar',
+        'He sentido superioridad o intimidado a otros',
+        'He notado que las personas me evitan debido a mi actitud o reacciones'
+      ],
+      'Agotamiento': [
+        'Me he sentido deprimido, abrumado o desesperanzado',
+        'He tenido ataques de pánico o confusión',
+        'He dormido demasiado o muy poco',
+        'He sentido que no puedo hacer frente a la situación',
+        'He llorado sin razón aparente',
+        'He olvidado cosas importantes',
+        'He tenido pensamientos negativos sobre mí mismo o pesimistas',
+        'He sentido impotencia, cansancio o entumecimiento',
+        'He querido huir o escapar',
+        'He tenido antojos de antiguas conductas destructivas',
+        'He buscado personas o lugares insanos',
+        'Me he aislado mucho',
+        'Otros se han enfadado conmigo por mi comportamiento',
+        'Me he maltratado o descuidado',
+        'He tenido pensamientos suicidas o desesperanza intensa',
+        'He faltado a compromisos o trabajo importantes',
+        'He estado funcionando en "modo supervivencia", haciendo solo lo mínimo para pasar el día'
+      ],
+      'Recaída': [
+        'He cedido y perdido control sobre mis conductas adictivas',
+        'Me he mentido a mí mismo o a otros sobre mi situación',
+        'Me he sentido incapaz de manejar la vida sin recurrir a conductas pasadas',
+        'He experimentado culpa, vergüenza o condena intensa',
+        'Me he sentido abandonado o solo',
+        'He vuelto a los comportamientos de los que prometí no regresar',
+        'He decidido manejar mi vida en mis propios términos en lugar de confiar en Dios'
+      ]
+    };
+
+    const STORAGE_ULTIMO = 'ultimoRegistro';
+    const STORAGE_HISTORIAL = 'historialFASTER';
+
+    let currentStepIndex = 0;
+    let finalizarFromPillar = null;
+    let historialView = 'list';
+    let historialReturnStep = 0;
+
+    const steps = document.querySelectorAll('.step[id^="step-"]');
+    const stepIds = Array.from(steps).map(s => s.id);
+
+    function initCheckboxes() {
+      PILLAR_ORDER.forEach((pillar, i) => {
+        const step = document.getElementById('step-' + PILLAR_IDS[i]);
+        const container = step.querySelector('.checkboxes');
+        container.innerHTML = '';
+        if (!step.querySelector('input[name="consejo"]')) {
+          const hidden = document.createElement('input');
+          hidden.type = 'hidden';
+          hidden.name = 'consejo';
+          hidden.value = CONSEJOS[pillar] || '';
+          step.querySelector('.textarea-group').insertBefore(hidden, step.querySelector('.textarea-group').firstChild);
+        }
+        const textareaPoderoso = step.querySelector('textarea[name="poderoso"]');
+        CHECKBOXES[pillar].forEach(label => {
+          const row = document.createElement('div');
+          row.className = 'checkbox-row';
+          const id = 'cb-' + PILLAR_IDS[i] + '-' + label.slice(0, 20).replace(/\s/g, '-');
+          row.innerHTML = '<input type="checkbox" id="' + id + '"><label for="' + id + '">' + escapeHtml(label) + '</label><button type="button" class="poderoso-btn" title="Mover a comportamiento más poderoso">💪</button>';
+          container.appendChild(row);
+          row.querySelector('.poderoso-btn').addEventListener('click', function() {
+            textareaPoderoso.value = label;
+            row.querySelector('input[type="checkbox"]').checked = true;
+          });
+        });
+      });
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function showStep(index) {
+      steps.forEach((s, i) => s.classList.toggle('active', i === index));
+      currentStepIndex = index;
+      const activeStep = document.querySelector('.step.active');
+      if (activeStep) activeStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function goNext() {
+      const inputCheck = validateCurrentStepInputs();
+      if (!inputCheck.ok) {
+        const step = document.querySelector('.step.active');
+        showMessage(inputCheck.message, true);
+        if (inputCheck.missingNames) markStepValidationErrors(step, inputCheck.missingNames);
+        return;
+      }
+      clearStepValidationErrors(document.querySelector('.step.active'));
+      hideMessage();
+      if (currentStepIndex < steps.length - 2) {
+        showStep(currentStepIndex + 1);
+      }
+    }
+
+    function goBack() {
+      if (currentStepIndex > 0) {
+        hideMessage();
+        clearStepValidationErrors(steps[currentStepIndex]);
+        showStep(currentStepIndex - 1);
+      }
+    }
+
+    function getStepPillarName(stepEl) {
+      return stepEl.dataset.pillar || null;
+    }
+
+    const TEXTAREA_NAMES = ['poderoso', 'q1', 'q2', 'q3'];
+    const TEXTAREA_LABELS = {
+      poderoso: 'Comportamiento más poderoso',
+      q1: '¿Cómo me afecta? ¿Cómo me siento en ese momento?',
+      q2: '¿Cómo afecta a las personas importantes de mi vida?',
+      q3: '¿Por qué lo hago? ¿Cuál es el beneficio para mí?'
+    };
+
+    function validateCurrentStepInputs() {
+      const step = document.querySelector('.step.active');
+      if (!step || !getStepPillarName(step)) return { ok: true };
+      const checkboxesContainer = step.querySelector('.checkboxes');
+      if (!checkboxesContainer) return { ok: true };
+      const anyChecked = checkboxesContainer.querySelectorAll('input[type="checkbox"]:checked').length > 0;
+      if (!anyChecked) return { ok: true };
+      const missingNames = [];
+      const missingLabels = [];
+      TEXTAREA_NAMES.forEach(name => {
+        const el = step.querySelector('textarea[name="' + name + '"]');
+        const val = (el && el.value) ? el.value.trim() : '';
+        if (!val) {
+          missingNames.push(name);
+          missingLabels.push(TEXTAREA_LABELS[name]);
+        }
+      });
+      if (missingNames.length > 0) {
+        return { ok: false, message: 'Si marcas al menos una casilla, debes rellenar todos los campos de texto: ' + missingLabels.join(', ') + '.', missingNames };
+      }
+      return { ok: true };
+    }
+
+    function showMessage(text, isError) {
+      const overlay = document.getElementById('message-overlay');
+      const box = document.getElementById('message-box');
+      const textEl = document.getElementById('message-box-text');
+      textEl.textContent = text;
+      box.classList.toggle('is-error', !!isError);
+      overlay.classList.add('is-visible');
+    }
+
+    function hideMessage() {
+      document.getElementById('message-overlay').classList.remove('is-visible');
+      document.getElementById('message-box').classList.remove('is-error');
+      document.getElementById('message-box').style.display = '';
+      document.getElementById('confirm-box').style.display = 'none';
+    }
+
+    function showConfirm(message, onYes) {
+      document.getElementById('message-box').style.display = 'none';
+      document.getElementById('confirm-box').style.display = 'block';
+      document.getElementById('confirm-text').textContent = message;
+      document.getElementById('message-overlay').classList.add('is-visible');
+      const overlay = document.getElementById('message-overlay');
+      const doHide = function() {
+        document.getElementById('message-overlay').classList.remove('is-visible');
+        document.getElementById('confirm-box').style.display = 'none';
+        document.getElementById('message-box').style.display = '';
+      };
+      document.getElementById('btn-confirm-yes').onclick = function() {
+        onYes();
+        doHide();
+      };
+      document.getElementById('btn-confirm-no').onclick = doHide;
+    }
+
+    function markStepValidationErrors(step, missingNames) {
+      if (!step) return;
+      TEXTAREA_NAMES.forEach(name => {
+        const el = step.querySelector('textarea[name="' + name + '"]');
+        if (el) {
+          if (missingNames.indexOf(name) >= 0) el.classList.add('validation-error');
+          else el.classList.remove('validation-error');
+        }
+      });
+      step.querySelectorAll('textarea[name]').forEach(ta => {
+        const once = function() {
+          if ((ta.value || '').trim()) {
+            ta.classList.remove('validation-error');
+            ta.removeEventListener('input', once);
+            ta.removeEventListener('change', once);
+          }
+        };
+        ta.addEventListener('input', once);
+        ta.addEventListener('change', once);
+      });
+    }
+
+    function clearStepValidationErrors(step) {
+      if (!step) return;
+      step.querySelectorAll('textarea.validation-error').forEach(el => el.classList.remove('validation-error'));
+    }
+
+    function collectAllData() {
+      const data = {};
+      PILLAR_ORDER.forEach((pillar, i) => {
+        const step = document.getElementById('step-' + PILLAR_IDS[i]);
+        const checked = [];
+        step.querySelectorAll('.checkboxes input[type="checkbox"]').forEach((cb, j) => {
+          if (cb.checked) checked.push(CHECKBOXES[pillar][j]);
+        });
+        const poderoso = (step.querySelector('textarea[name="poderoso"]') || {}).value || '';
+        const q1 = (step.querySelector('textarea[name="q1"]') || {}).value || '';
+        const q2 = (step.querySelector('textarea[name="q2"]') || {}).value || '';
+        const q3 = (step.querySelector('textarea[name="q3"]') || {}).value || '';
+        data[pillar] = { checked, poderoso, q1, q2, q3 };
+      });
+      return data;
+    }
+
+    function hasAnyData(record) {
+      return record.checked.length > 0 || (record.poderoso && record.poderoso.trim() !== '');
+    }
+
+    function recordHasAnyData(rec) {
+      if (!rec) return false;
+      const c = rec.checked && rec.checked.length > 0;
+      const p = rec.poderoso && String(rec.poderoso).trim() !== '';
+      const q1 = rec.q1 && String(rec.q1).trim() !== '';
+      const q2 = rec.q2 && String(rec.q2).trim() !== '';
+      const q3 = rec.q3 && String(rec.q3).trim() !== '';
+      return c || p || q1 || q2 || q3;
+    }
+
+    function compactData(data) {
+      const out = {};
+      PILLAR_ORDER.forEach(pillar => {
+        const rec = data[pillar];
+        if (!rec || !recordHasAnyData(rec)) return;
+        const compactRec = { checked: rec.checked || [] };
+        if (rec.poderoso && String(rec.poderoso).trim() !== '') compactRec.poderoso = rec.poderoso.trim();
+        if (rec.q1 && String(rec.q1).trim() !== '') compactRec.q1 = rec.q1.trim();
+        if (rec.q2 && String(rec.q2).trim() !== '') compactRec.q2 = rec.q2.trim();
+        if (rec.q3 && String(rec.q3).trim() !== '') compactRec.q3 = rec.q3.trim();
+        out[pillar] = compactRec;
+      });
+      return out;
+    }
+
+    function validatePilaresOrder(data) {
+      let lastFilledIndex = -1;
+      for (let i = 0; i < PILLAR_ORDER.length; i++) {
+        const rec = data[PILLAR_ORDER[i]];
+        if (rec && hasAnyData(rec)) lastFilledIndex = i;
+      }
+      if (lastFilledIndex === -1) {
+        return { valid: false, missingPillars: [], message: 'Debes completar al menos un pilar.' };
+      }
+      const missingPillars = [];
+      for (let i = 0; i < lastFilledIndex; i++) {
+        const rec = data[PILLAR_ORDER[i]];
+        if (!rec || !hasAnyData(rec)) missingPillars.push(PILLAR_ORDER[i]);
+      }
+      if (missingPillars.length === 0) {
+        return { valid: true, missingPillars: [] };
+      }
+      return { valid: false, missingPillars, message: 'Hay pilares que no has completado. Debes volver y rellenar: ' + missingPillars.join(', ') + '.' };
+    }
+
+    function getPillarStepIndex(pillarName) {
+      const idx = PILLAR_ORDER.indexOf(pillarName);
+      return idx >= 0 ? idx : 0;
+    }
+
+    function getLastPillarWithData(data) {
+      let last = null;
+      PILLAR_ORDER.forEach(pillar => {
+        const rec = data[pillar];
+        if (rec && hasAnyData(rec)) last = pillar;
+      });
+      return last;
+    }
+
+    function renderPilaresOverview(data) {
+      let lastFilledIndex = -1;
+      for (let i = 0; i < PILLAR_ORDER.length; i++) {
+        const rec = data[PILLAR_ORDER[i]];
+        if (rec && hasAnyData(rec)) lastFilledIndex = i;
+      }
+      const container = document.getElementById('pilares-list');
+      let html = '';
+      PILLAR_ORDER.forEach((pillar, i) => {
+        const rec = data[pillar];
+        const filled = rec && hasAnyData(rec);
+        let icon = '';
+        if (filled) {
+          icon = '<span class="pilares-icon filled">✓</span>';
+        } else if (i > lastFilledIndex) {
+          icon = '<span class="pilares-icon optional">✓</span>';
+        } else {
+          icon = '<span class="pilares-icon missing" title="Debes rellenar este pilar">⛔</span>';
+        }
+        html += '<div class="pilares-item">' + icon + ' <a href="#" class="pillar-link" data-pillar-index="' + i + '">' + escapeHtml(pillar) + '</a></div>';
+      });
+      container.innerHTML = html;
+      container.querySelectorAll('.pillar-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const index = parseInt(this.getAttribute('data-pillar-index'), 10);
+          showStep(index + 1);
+        });
+      });
+    }
+
+    function renderResumen(data, fromPillar) {
+      const container = document.getElementById('resumen-content');
+      const titleEl = document.getElementById('resumen-title');
+
+      const displayPillar = getLastPillarWithData(data);
+      titleEl.textContent = 'Estás en ' + (displayPillar || 'Resumen');
+
+      const rec = displayPillar && data[displayPillar] ? data[displayPillar] : null;
+      const consejo = displayPillar && CONSEJOS[displayPillar] ? CONSEJOS[displayPillar] : '';
+      let html = '';
+      if (rec && hasAnyData(rec)) {
+        html += '<div class="resumen-pilar">';
+        if (rec.checked && rec.checked.length) {
+          html += '<ul>';
+          rec.checked.forEach(l => { html += '<li>' + escapeHtml(l) + '</li>'; });
+          html += '</ul>';
+        }
+        if (rec.poderoso && rec.poderoso.trim()) {
+          html += '<div class="resumen-block"><p class="resumen-title">Comportamiento más poderoso:</p><p class="resumen-value">' + escapeHtml(rec.poderoso.trim()) + '</p></div>';
+        }
+        if (rec.q1 && rec.q1.trim()) html += '<div class="resumen-block"><p class="resumen-title">¿Cómo me afecta? ¿Cómo me siento en ese momento?</p><p class="resumen-value">' + escapeHtml(rec.q1.trim()) + '</p></div>';
+        if (rec.q2 && rec.q2.trim()) html += '<div class="resumen-block"><p class="resumen-title">¿Cómo afecta a las personas importantes de mi vida?</p><p class="resumen-value">' + escapeHtml(rec.q2.trim()) + '</p></div>';
+        if (rec.q3 && rec.q3.trim()) html += '<div class="resumen-block"><p class="resumen-title">¿Por qué lo hago? ¿Cuál es el beneficio para mí?</p><p class="resumen-value">' + escapeHtml(rec.q3.trim()) + '</p></div>';
+        if (consejo) html += '<div class="resumen-block"><p class="resumen-title">Consejo:</p><p class="resumen-value">' + escapeHtml(consejo) + '</p></div>';
+        html += '</div>';
+      }
+      container.innerHTML = html || '<p>No hay datos para mostrar.</p>';
+    }
+
+    function openHistorial() {
+      historialReturnStep = currentStepIndex;
+      historialView = 'list';
+      renderHistorialList();
+      document.getElementById('btn-historial-back').textContent = 'Volver';
+      document.getElementById('btn-historial-borrar').style.display = '';
+      document.getElementById('btn-historial-exportar').style.display = '';
+      showStep(stepIds.indexOf('step-historial'));
+    }
+
+    function renderHistorialList() {
+      const historial = JSON.parse(localStorage.getItem(STORAGE_HISTORIAL) || '[]');
+      const panel = document.getElementById('historial-panel');
+      if (historial.length === 0) {
+        panel.innerHTML = '<p class="description">No hay registros guardados.</p>';
+        return;
+      }
+      let html = '<p class="description">Marca los registros que quieras exportar y pulsa Exportar HTML. Haz clic en un registro para verlo completo.</p><div class="historial-list">';
+      historial.forEach((item, idx) => {
+        html += '<div class="historial-item record-link" data-record-index="' + idx + '"><span class="export-check-wrap"><input type="checkbox" class="export-checkbox" data-record-index="' + idx + '" checked></span><span class="fecha">' + escapeHtml(item.fecha || '') + '</span></div>';
+      });
+      html += '</div>';
+      panel.innerHTML = html;
+      panel.querySelectorAll('.export-checkbox').forEach(cb => {
+        cb.addEventListener('click', function(e) { e.stopPropagation(); });
+      });
+      panel.querySelectorAll('.record-link').forEach(el => {
+        el.addEventListener('click', function(e) {
+          if (e.target.classList.contains('export-checkbox') || e.target.closest('.export-check-wrap')) return;
+          const idx = parseInt(this.getAttribute('data-record-index'), 10);
+          historialView = { detailIndex: idx };
+          renderHistorialDetail(idx);
+          document.getElementById('btn-historial-back').textContent = 'Volver al listado';
+          document.getElementById('btn-historial-borrar').style.display = 'none';
+          document.getElementById('btn-historial-exportar').style.display = 'none';
+        });
+      });
+    }
+
+    function buildRecordHtml(item) {
+      const data = item.data || {};
+      let html = '<section class="export-record"><h2>Registro — ' + escapeHtml(item.fecha || '') + '</h2>';
+      PILLAR_ORDER.forEach(pillar => {
+        const rec = data[pillar];
+        if (!rec || !recordHasAnyData(rec)) return;
+        html += '<div class="export-pilar"><h3>' + escapeHtml(pillar) + '</h3>';
+        if (rec.checked && rec.checked.length) {
+          html += '<ul>';
+          rec.checked.forEach(l => { html += '<li>' + escapeHtml(l) + '</li>'; });
+          html += '</ul>';
+        }
+        if (rec.poderoso && String(rec.poderoso).trim()) html += '<p><strong>Comportamiento más poderoso:</strong></p><p>' + escapeHtml(rec.poderoso.trim()) + '</p>';
+        if (rec.q1 && String(rec.q1).trim()) html += '<p><strong>¿Cómo me afecta? ¿Cómo me siento en ese momento?</strong></p><p>' + escapeHtml(rec.q1.trim()) + '</p>';
+        if (rec.q2 && String(rec.q2).trim()) html += '<p><strong>¿Cómo afecta a las personas importantes de mi vida?</strong></p><p>' + escapeHtml(rec.q2.trim()) + '</p>';
+        if (rec.q3 && String(rec.q3).trim()) html += '<p><strong>¿Por qué lo hago? ¿Cuál es el beneficio para mí?</strong></p><p>' + escapeHtml(rec.q3.trim()) + '</p>';
+        if (CONSEJOS[pillar]) html += '<p><strong>Consejo:</strong></p><p>' + escapeHtml(CONSEJOS[pillar]) + '</p>';
+        html += '</div>';
+      });
+      html += '</section>';
+      return html;
+    }
+
+    function exportHistorialHTML() {
+      const checked = document.querySelectorAll('#historial-panel .export-checkbox:checked');
+      if (!checked.length) {
+        showMessage('Selecciona al menos un registro para exportar.', true);
+        return;
+      }
+      const historial = JSON.parse(localStorage.getItem(STORAGE_HISTORIAL) || '[]');
+      const indices = Array.from(checked).map(cb => parseInt(cb.getAttribute('data-record-index'), 10));
+      const toExport = indices.map(i => historial[i]).filter(Boolean);
+      const style = '<style>body{font-family:system-ui,sans-serif;max-width:720px;margin:0 auto;padding:1rem;color:#222;}.export-record{margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid #ddd;}.export-record:last-child{border-bottom:none;}.export-pilar{margin-bottom:1.25rem;}.export-pilar h3{margin:0.5rem 0 0.25rem 0;font-size:1.1rem;}.export-pilar ul{margin:0.25rem 0;padding-left:1.25rem;}.export-pilar p{margin:0.25rem 0;}</style>';
+      let body = '<h1>F.A.S.T.E.R. — Registros exportados</h1>';
+      toExport.forEach(item => { body += buildRecordHtml(item); });
+      const fullHtml = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">' + style + '</head><body>' + body + '</body></html>';
+      const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'faster-registros-' + (new Date().toISOString().slice(0, 10)) + '.html';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function renderHistorialDetail(index) {
+      const historial = JSON.parse(localStorage.getItem(STORAGE_HISTORIAL) || '[]');
+      const item = historial[index];
+      const panel = document.getElementById('historial-panel');
+      if (!item) {
+        panel.innerHTML = '<p>Registro no encontrado.</p>';
+        return;
+      }
+      const data = item.data || {};
+      let html = '<p class="description"><strong>Fecha:</strong> ' + escapeHtml(item.fecha || '') + '</p>';
+      PILLAR_ORDER.forEach(pillar => {
+        const rec = data[pillar];
+        if (!rec || !recordHasAnyData(rec)) return;
+        html += '<div class="registro-detalle-pilar">';
+        html += '<h3>' + escapeHtml(pillar) + '</h3>';
+        if (rec.checked && rec.checked.length) {
+          html += '<ul>';
+          rec.checked.forEach(l => { html += '<li>' + escapeHtml(l) + '</li>'; });
+          html += '</ul>';
+        }
+        if (rec.poderoso && String(rec.poderoso).trim()) {
+          html += '<div class="resumen-block"><p class="resumen-title">Comportamiento más poderoso:</p><p class="resumen-value">' + escapeHtml(rec.poderoso.trim()) + '</p></div>';
+        }
+        if (rec.q1 && String(rec.q1).trim()) html += '<div class="resumen-block"><p class="resumen-title">¿Cómo me afecta? ¿Cómo me siento en ese momento?</p><p class="resumen-value">' + escapeHtml(rec.q1.trim()) + '</p></div>';
+        if (rec.q2 && String(rec.q2).trim()) html += '<div class="resumen-block"><p class="resumen-title">¿Cómo afecta a las personas importantes de mi vida?</p><p class="resumen-value">' + escapeHtml(rec.q2.trim()) + '</p></div>';
+        if (rec.q3 && String(rec.q3).trim()) html += '<div class="resumen-block"><p class="resumen-title">¿Por qué lo hago? ¿Cuál es el beneficio para mí?</p><p class="resumen-value">' + escapeHtml(rec.q3.trim()) + '</p></div>';
+        if (CONSEJOS[pillar]) html += '<div class="resumen-block"><p class="resumen-title">Consejo:</p><p class="resumen-value">' + escapeHtml(CONSEJOS[pillar]) + '</p></div>';
+        html += '</div>';
+      });
+      panel.innerHTML = html || '<p>Sin datos.</p>';
+    }
+
+    function borrarTodosLosRegistros() {
+      showConfirm('¿Estás seguro de que quieres borrar todos los registros? Esta acción no se puede deshacer.', function() {
+        localStorage.setItem(STORAGE_HISTORIAL, '[]');
+        renderHistorialList();
+      });
+    }
+
+    function goToPilaresOverview() {
+      const step = steps[currentStepIndex];
+      const inputCheck = validateCurrentStepInputs();
+      if (!inputCheck.ok) {
+        showMessage(inputCheck.message, true);
+        if (inputCheck.missingNames) markStepValidationErrors(step, inputCheck.missingNames);
+        return;
+      }
+      finalizarFromPillar = getStepPillarName(step);
+      const data = collectAllData();
+      clearStepValidationErrors(step);
+      hideMessage();
+      localStorage.setItem(STORAGE_ULTIMO, JSON.stringify(data));
+      renderPilaresOverview(data);
+      showStep(stepIds.indexOf('step-pilares'));
+    }
+
+    function finalizar() {
+      goToPilaresOverview();
+    }
+
+    function irAResumen() {
+      const data = collectAllData();
+      const validation = validatePilaresOrder(data);
+      if (!validation.valid) {
+        showMessage(validation.message, true);
+        return;
+      }
+      localStorage.setItem(STORAGE_ULTIMO, JSON.stringify(data));
+      const historial = JSON.parse(localStorage.getItem(STORAGE_HISTORIAL) || '[]');
+      const fecha = new Date().toLocaleString('es');
+      historial.push({ fecha, data: compactData(data) });
+      localStorage.setItem(STORAGE_HISTORIAL, JSON.stringify(historial));
+      showMessage('Registro guardado.', false);
+      renderResumen(data, finalizarFromPillar);
+      showStep(stepIds.indexOf('step-resumen'));
+    }
+
+    function empezarDeNuevo() {
+      showStep(0);
+    }
+
+    function bindNav() {
+      document.querySelectorAll('.next-btn').forEach(btn => {
+        btn.addEventListener('click', goNext);
+      });
+      document.querySelectorAll('.back-btn').forEach(btn => {
+        btn.addEventListener('click', goBack);
+      });
+      document.querySelectorAll('.fin-btn').forEach(btn => btn.addEventListener('click', goToPilaresOverview));
+      document.querySelector('.finalizar-btn').addEventListener('click', finalizar);
+      document.getElementById('btn-ver-resumen').addEventListener('click', irAResumen);
+      document.getElementById('btn-empezar-de-nuevo').addEventListener('click', empezarDeNuevo);
+      document.getElementById('btn-ver-mis-registros-resumen').addEventListener('click', openHistorial);
+      document.getElementById('btn-ver-mis-registros-inicio').addEventListener('click', openHistorial);
+      document.getElementById('btn-historial-back').addEventListener('click', function() {
+        if (historialView === 'list') {
+          showStep(historialReturnStep);
+        } else {
+          historialView = 'list';
+          renderHistorialList();
+          this.textContent = 'Volver';
+          document.getElementById('btn-historial-borrar').style.display = '';
+          document.getElementById('btn-historial-exportar').style.display = '';
+        }
+      });
+      document.getElementById('btn-historial-exportar').addEventListener('click', exportHistorialHTML);
+      document.getElementById('btn-historial-borrar').addEventListener('click', borrarTodosLosRegistros);
+      document.getElementById('message-box-close').addEventListener('click', hideMessage);
+      document.getElementById('message-overlay').addEventListener('click', function(e) {
+        if (e.target === this) hideMessage();
+      });
+      document.getElementById('message-box').addEventListener('click', function(e) { e.stopPropagation(); });
+      document.getElementById('confirm-box').addEventListener('click', function(e) { e.stopPropagation(); });
+      document.getElementById('btn-iniciar').addEventListener('click', function() {
+        showStep(1);
+      });
+    }
+
+    initCheckboxes();
+    bindNav();
+    showStep(0);
+  </script>
+</body>
+</html>

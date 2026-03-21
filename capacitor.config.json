@@ -1,0 +1,8 @@
+{
+  "appId": "com.faster.diario",
+  "appName": "F.A.S.T.E.R.",
+  "webDir": "faster-diario",
+  "server": {
+    "androidScheme": "https"
+  }
+}

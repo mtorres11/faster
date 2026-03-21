@@ -1,0 +1,17 @@
+{
+  "name": "faster-diario",
+  "version": "1.0.0",
+  "description": "Escala F.A.S.T.E.R. Diario - app móvil",
+  "scripts": {
+    "build": "echo No build step - web app is static",
+    "cap:sync": "cap sync",
+    "cap:open:android": "cap open android",
+    "cap:open:ios": "cap open ios"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/cli": "8.1.0",
+    "@capacitor/core": "^6.1.2",
+    "@capacitor/ios": "^6.1.2"
+  }
+}

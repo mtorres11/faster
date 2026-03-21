@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<strings>
+  <string id="title_page">FASTER Daily Scale</string>
+  <string id="app_title">F.A.S.T.E.R.</string>
+  <string id="options_menu_label">Options</string>
+  <string id="aria_options">Options</string>
+  <string id="aria_language">Language</string>
+  <string id="menu_home">Home</string>
+  <string id="menu_profile">Profile</string>
+  <string id="menu_logout">Log out</string>
+  <string id="lang_english">English</string>
+  <string id="lang_spanish">Spanish</string>
+
+  <string id="title_what_is_faster">What is F.A.S.T.E.R.?</string>
+  <string id="desc_intro">The F.A.S.T.E.R. scale helps you recognize where you are on your restoration journey. Each letter represents a stage of decline; the first (Restoration) is the ideal state. Review the pillars honestly to identify areas that need attention.</string>
+  <string id="faster_f">F — Forgetting Priorities</string>
+  <string id="faster_f_desc">It is the beginning of spiritual decline. The person begins to neglect communion with God and eternal priorities. There is no open fall yet, but an internal shift: less prayer, less vigilance, more distraction and self-sufficiency.</string>
+  <string id="faster_a">A — Anxiety</string>
+  <string id="faster_a_desc">An internal noise of worry and fear arises. Practical trust in God decreases and thoughts become disordered. Resentment, speculation, and emotional tension appear.</string>
+  <string id="faster_s">S — Speeding Up</string>
+  <string id="faster_s_desc">It is the fleshly response to anxiety. Instead of stopping and depending on God, the person speeds up: overcommits, works compulsively, or fills their schedule to avoid facing what they feel. Doing replaces resting in God.</string>
+  <string id="faster_t">T — Ticked Off (Anger / Constant Irritation)</string>
+  <string id="faster_t_desc">Accumulated frustration turns into anger. There are overreactions, pride, and defensiveness. The person becomes more critical, less patient, and more prone to conflict.</string>
+  <string id="faster_e">E — Exhaustion</string>
+  <string id="faster_e_desc">After living in anxiety, speeding up, and anger, collapse comes. There is physical, emotional, and spiritual fatigue. Joy and clarity are lost. It is a state of extreme vulnerability.</string>
+  <string id="faster_r">R — Relapse</string>
+  <string id="faster_r_desc">It is the return to previously abandoned sinful or addictive behaviors. The person gives in to desire, loses control, and experiences guilt and shame. It is the final result of the downward process if not interrupted earlier.</string>
+  <string id="how_to_use">How to use the program: Go through the pillars in order. In each one, check the phrases that describe your situation, fill in “Most powerful behavior” and the questions. Use Back and Next, or End to go to the pillars summary. The 💪 button moves that phrase to “Most powerful behavior”. If you fill a pillar, all previous ones must have something too. View Summary shows the last pillar with data and its advice.</string>
+  <string id="btn_start">Start</string>
+  <string id="btn_view_my_records">View my records</string>
+
+  <string id="title_most_powerful_tooltip">Move to most powerful behavior</string>
+  <string id="label_most_powerful">Most powerful behavior</string>
+  <string id="label_q1">How does it affect me? How do I feel in that moment?</string>
+  <string id="label_q2">How does it affect the important people in my life?</string>
+  <string id="label_q3">Why do I do it? What is the benefit for me?</string>
+  <string id="btn_back">Back</string>
+  <string id="btn_next">Next</string>
+  <string id="btn_pillars_summary">Review My Pillars</string>
+  <string id="btn_finish">Finish</string>
+
+  <string id="title_restoration">Restoration</string>
+  <string id="desc_restoration">It is the state of walking in the light: living without hiding sin, practicing confession, obedience, gratitude, and communion with God and other believers. It reflects a life aligned with truth, with accountability, humility, and continual growth in sanctification.</string>
+  <string id="title_forgetting_priorities">Forgetting priorities</string>
+  <string id="desc_forgetting_priorities">It is the beginning of spiritual cooling. The heart begins to shift from God toward temporal concerns. Secrets, distractions, and self-sufficiency appear. It is not yet open fall, but an internal deviation from first love.</string>
+  <string id="title_anxiety">Anxiety</string>
+  <string id="desc_anxiety">It is a state where the heart loses rest in God’s sovereignty and begins to be dominated by fear, disordered thoughts, and intense emotions. It reflects a practical loss of trust in God’s character and providential control.</string>
+  <string id="title_speeding_up">Speeding up</string>
+  <string id="desc_speeding_up">It is a fleshly response to anxiety: hyperactivity, self-sufficiency, and excessive effort to control outcomes. Doing replaces depending, and rest in God is lost.</string>
+  <string id="title_getting_angry">Getting angry</string>
+  <string id="desc_getting_angry">It is when pride and frustration take control. Sinful anger replaces meekness, and the heart hardens. Being right is sought more than reflecting Christ’s character.</string>
+  <string id="title_exhaustion">Exhaustion</string>
+  <string id="desc_exhaustion">It is the consequence of living in prolonged tension outside of rest in God. There is loss of joy and hope, and the person functions in survival mode, vulnerable to falling back into old patterns.</string>
+  <string id="title_relapse">Relapse</string>
+  <string id="desc_relapse">It is the conscious return to previously abandoned patterns of sin. It involves giving in to desire, taking control independent of God, and experiencing renewed guilt and shame.</string>
+
+  <string id="title_pilares">Pillars</string>
+  <string id="desc_pilares">Review which pillars have information. You can go to any of them to complete or edit.</string>
+  <string id="pillars_must_fill_this">You must fill this pillar</string>
+  <string id="btn_view_summary">View Summary</string>
+
+  <string id="title_summary">Summary</string>
+  <string id="summary_you_are_at">You are at</string>
+  <string id="btn_start_over">Start Over</string>
+  <string id="summary_most_powerful_behavior">Most powerful behavior:</string>
+  <string id="summary_advice">Advice:</string>
+  <string id="msg_no_data">No data to display.</string>
+
+  <string id="title_my_records">My records</string>
+  <string id="btn_back">Back</string>
+  <string id="btn_back_to_list">Back to list</string>
+  <string id="btn_export_html">Export HTML</string>
+  <string id="btn_delete_all">Delete all</string>
+  <string id="msg_no_records">No saved records yet.</string>
+  <string id="msg_history_instructions">Check the records you want to export and click Export HTML. Click a record to view it in full.</string>
+  <string id="msg_record_not_found">Record not found.</string>
+  <string id="msg_no_data_short">No data.</string>
+
+  <string id="btn_close">Close</string>
+  <string id="confirm_yes_delete_all">Yes, delete all</string>
+  <string id="confirm_no_cancel">No, cancel</string>
+  <string id="confirm_delete_all_message">Are you sure you want to delete all records? This action cannot be undone.</string>
+
+  <string id="msg_validation_fill_all">If you check at least one box, you must fill in all text fields: {0}.</string>
+  <string id="msg_complete_one_pillar">You must complete at least one pillar.</string>
+  <string id="msg_fill_previous_pillars">Some pillars are incomplete. You must go back and fill: {0}.</string>
+  <string id="msg_record_saved">Record saved.</string>
+  <string id="msg_select_one_export">Select at least one record to export.</string>
+  <string id="export_records_title">F.A.S.T.E.R. — Exported records</string>
+  <string id="record_label">Record —</string>
+  <string id="date_label">Date:</string>
+
+  <!-- Advice -->
+  <string id="advice_restoration">Remain in the Word daily, pray consistently, keep active fellowship with other believers, and practice immediate confession when you fail. Perseverance in the means of grace (Scripture, prayer, church, and accountability) is what sustains restoration.</string>
+  <string id="advice_forgetting_priorities">Recognize the drift and repent deliberately. Restore defined times of prayer and Scripture, seek accountability, and remove distractions that compete with your communion with God. Restoration begins when you put God first again.</string>
+  <string id="advice_anxiety">Renew your mind with biblical truth. Replace speculative thoughts with clear promises from Scripture. Pray, casting your burdens on God with thanksgiving. Peace grows when truth rules the mind.</string>
+  <string id="advice_speeding_up">Practice intentional rest. Reduce unnecessary activity and set aside times of silence, prayer, and biblical reflection. Remember that faithfulness is measured not by activity but by dependent obedience.</string>
+  <string id="advice_getting_angry">Confess the pride that feeds anger. Practice deliberate humility and seek quick reconciliation. Meditate on the grace you have received, and let that mercy shape how you treat others.</string>
+  <string id="advice_exhaustion">Return to the essentials: adequate physical rest, sincere prayer, and fellowship with mature believers. Do not try to fix everything at once; prioritize restoring your relationship with God and trusting His sustaining grace.</string>
+  <string id="advice_relapse">Do not hide in shame. Confess immediately, repent genuinely, and remove sources of temptation. Cling to the gospel: there is real forgiveness and power to get up again in obedience.</string>
+
+  <!-- Checkboxes Restoration (0-6) -->
+  <string id="cb_restoration_0">This week I was honest with myself and others, with no significant secrets</string>
+  <string id="cb_restoration_1">I worked actively to resolve pending problems</string>
+  <string id="cb_restoration_2">I identified my fears and feelings and faced them</string>
+  <string id="cb_restoration_3">I kept my commitments to meetings, prayer, family, and friends</string>
+  <string id="cb_restoration_4">I practiced gratitude and vulnerability with others</string>
+  <string id="cb_restoration_5">I increased my connection and trust in God and significant people</string>
+  <string id="cb_restoration_6">I was open, honest, and made eye contact in important interactions</string>
+
+  <!-- Checkboxes Forgetting priorities (0-17) -->
+  <string id="cb_forgetting_priorities_0">I have kept secrets that affect my spiritual life or relationships</string>
+  <string id="cb_forgetting_priorities_1">I have spent less time or energy on prayer, meetings, or church activities</string>
+  <string id="cb_forgetting_priorities_2">I have avoided support or accountability people</string>
+  <string id="cb_forgetting_priorities_3">I have had superficial instead of deep conversations</string>
+  <string id="cb_forgetting_priorities_4">I have changed important goals or priorities without clear reason</string>
+  <string id="cb_forgetting_priorities_5">I have been obsessed with relationships or material matters</string>
+  <string id="cb_forgetting_priorities_6">I have broken promises or commitments</string>
+  <string id="cb_forgetting_priorities_7">I have neglected my family or close people</string>
+  <string id="cb_forgetting_priorities_8">I have sought to control situations or other people</string>
+  <string id="cb_forgetting_priorities_9">I have been distracted by entertainment, TV, computer, or excessive leisure</string>
+  <string id="cb_forgetting_priorities_10">I have lied or exaggerated to improve my image with others</string>
+  <string id="cb_forgetting_priorities_11">I have used sarcasm or passive-aggressive attitudes</string>
+  <string id="cb_forgetting_priorities_12">I have been emotionally isolated from others</string>
+  <string id="cb_forgetting_priorities_13">I have procrastinated on important matters</string>
+  <string id="cb_forgetting_priorities_14">I have acted overconfidently, minimizing risks</string>
+  <string id="cb_forgetting_priorities_15">I have felt constant boredom that leads me to distract myself</string>
+  <string id="cb_forgetting_priorities_16">I have hidden money or financial information</string>
+  <string id="cb_forgetting_priorities_17">I have denied real problems or fled important conversations</string>
+
+  <!-- Checkboxes Anxiety (0-13) -->
+  <string id="cb_anxiety_0">I have worried constantly or felt undefined fear</string>
+  <string id="cb_anxiety_1">I have used harsh words or been irritable</string>
+  <string id="cb_anxiety_2">I have felt resentment toward someone</string>
+  <string id="cb_anxiety_3">I have judged the intentions or motives of others</string>
+  <string id="cb_anxiety_4">I have tried to set goals or lists I cannot fulfill</string>
+  <string id="cb_anxiety_5">I have &quot;read the mind&quot; of others without evidence</string>
+  <string id="cb_anxiety_6">I have fantasized or tried to rescue others in a codependent way</string>
+  <string id="cb_anxiety_7">I have had concentration or sleep problems</string>
+  <string id="cb_anxiety_8">I have sought or created unnecessary drama</string>
+  <string id="cb_anxiety_9">I have used over-the-counter medications (for pain, sleep, or weight control)</string>
+  <string id="cb_anxiety_10">I have flirted inappropriately</string>
+  <string id="cb_anxiety_11">I have repeated old negative thoughts about myself or my past</string>
+  <string id="cb_anxiety_12">I have acted from perfectionism or fear of making mistakes</string>
+  <string id="cb_anxiety_13">I have participated in gossip or harmful conversations about others</string>
+
+  <!-- Checkboxes Speeding up (0-14) -->
+  <string id="cb_speeding_up_0">I have kept myself super busy to avoid my emotions</string>
+  <string id="cb_speeding_up_1">I have overworked or felt like a workaholic</string>
+  <string id="cb_speeding_up_2">I have avoided relaxing or slowing down</string>
+  <string id="cb_speeding_up_3">I have felt impulsivity or difficulty turning off my thoughts</string>
+  <string id="cb_speeding_up_4">I have skipped meals or had binge eating</string>
+  <string id="cb_speeding_up_5">I have overspent money</string>
+  <string id="cb_speeding_up_6">I have had difficulty identifying my feelings or needs</string>
+  <string id="cb_speeding_up_7">I have repeated negative thoughts constantly</string>
+  <string id="cb_speeding_up_8">I have been irritable or had drastic mood swings</string>
+  <string id="cb_speeding_up_9">I have consumed too much caffeine or stimulants</string>
+  <string id="cb_speeding_up_10">I have over-exercised</string>
+  <string id="cb_speeding_up_11">I have had difficulty being alone or with others</string>
+  <string id="cb_speeding_up_12">I have made excuses to &quot;do it all&quot;</string>
+  <string id="cb_speeding_up_13">I have felt constant physical nervousness</string>
+  <string id="cb_speeding_up_14">I have had real difficulty listening to others attentively</string>
+
+  <!-- Checkboxes Getting angry (0-13) -->
+  <string id="cb_getting_angry_0">I have procrastinated, causing problems at work, with money, or in relationships</string>
+  <string id="cb_getting_angry_1">I have increased sarcasm or hurtful comments</string>
+  <string id="cb_getting_angry_2">I have thought in &quot;all or nothing&quot; terms</string>
+  <string id="cb_getting_angry_3">I have felt alone or misunderstood</string>
+  <string id="cb_getting_angry_4">I have overreacted or reacted with rage</string>
+  <string id="cb_getting_angry_5">I have had constant resentments</string>
+  <string id="cb_getting_angry_6">I have pushed others away or increased my isolation</string>
+  <string id="cb_getting_angry_7">I have blamed others or argued</string>
+  <string id="cb_getting_angry_8">I have had irrational thinking or not accepted criticism</string>
+  <string id="cb_getting_angry_9">I have been defensive or needed to be right</string>
+  <string id="cb_getting_angry_10">I have had physical problems from stress (headache, digestion)</string>
+  <string id="cb_getting_angry_11">I have had obsessive thoughts or difficulty forgiving</string>
+  <string id="cb_getting_angry_12">I have felt superior or intimidated others</string>
+  <string id="cb_getting_angry_13">I have noticed people avoiding me because of my attitude or reactions</string>
+
+  <!-- Checkboxes Exhaustion (0-16) -->
+  <string id="cb_exhaustion_0">I have felt depressed, overwhelmed, or hopeless</string>
+  <string id="cb_exhaustion_1">I have had panic attacks or confusion</string>
+  <string id="cb_exhaustion_2">I have slept too much or too little</string>
+  <string id="cb_exhaustion_3">I have felt I cannot cope with the situation</string>
+  <string id="cb_exhaustion_4">I have cried for no apparent reason</string>
+  <string id="cb_exhaustion_5">I have forgotten important things</string>
+  <string id="cb_exhaustion_6">I have had negative or pessimistic thoughts about myself</string>
+  <string id="cb_exhaustion_7">I have felt helpless, tired, or numb</string>
+  <string id="cb_exhaustion_8">I have wanted to run away or escape</string>
+  <string id="cb_exhaustion_9">I have had cravings for old destructive behaviors</string>
+  <string id="cb_exhaustion_10">I have sought unhealthy people or places</string>
+  <string id="cb_exhaustion_11">I have isolated myself a lot</string>
+  <string id="cb_exhaustion_12">Others have been angry with me because of my behavior</string>
+  <string id="cb_exhaustion_13">I have mistreated or neglected myself</string>
+  <string id="cb_exhaustion_14">I have had suicidal thoughts or intense hopelessness</string>
+  <string id="cb_exhaustion_15">I have missed important commitments or work</string>
+  <string id="cb_exhaustion_16">I have been functioning in &quot;survival mode&quot;, doing only the minimum to get through the day</string>
+
+  <!-- Checkboxes Relapse (0-6) -->
+  <string id="cb_relapse_0">I have given in and lost control over my addictive behaviors</string>
+  <string id="cb_relapse_1">I have lied to myself or others about my situation</string>
+  <string id="cb_relapse_2">I have felt unable to handle life without resorting to past behaviors</string>
+  <string id="cb_relapse_3">I have experienced intense guilt, shame, or condemnation</string>
+  <string id="cb_relapse_4">I have felt abandoned or alone</string>
+  <string id="cb_relapse_5">I have returned to behaviors I promised not to return to</string>
+  <string id="cb_relapse_6">I have decided to run my life on my own terms instead of trusting God</string>
+</strings>

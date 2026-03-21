@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<strings>
+  <string id="title_page">Escala FASTER Diario</string>
+  <string id="app_title">F.A.S.T.E.R.</string>
+  <string id="options_menu_label">Opciones</string>
+  <string id="aria_options">Opciones</string>
+  <string id="aria_language">Idioma</string>
+  <string id="menu_home">Inicio</string>
+  <string id="menu_profile">Perfil</string>
+  <string id="menu_logout">Cerrar sesión</string>
+  <string id="lang_english">English</string>
+  <string id="lang_spanish">Spanish</string>
+
+  <string id="title_what_is_faster">¿Qué es F.A.S.T.E.R.?</string>
+  <string id="desc_intro">La escala F.A.S.T.E.R. te ayuda a reconocer en qué punto te encuentras en tu camino de restauración. Cada letra representa una etapa de deterioro; la primera (Restauración) es el estado ideal. Revisa los pilares con honestidad para identificar áreas que necesitan atención.</string>
+  <string id="faster_f">F — Forgetting Priorities (Olvidar prioridades)</string>
+  <string id="faster_f_desc">Es el inicio del deterioro espiritual. La persona comienza a descuidar su comunión con Dios y sus prioridades eternas. No hay caída abierta todavía, pero sí un desplazamiento interno: menos oración, menos vigilancia, más distracción y autosuficiencia.</string>
+  <string id="faster_a">A — Anxiety (Ansiedad)</string>
+  <string id="faster_a_desc">Surge un ruido interno de preocupación y temor. La confianza práctica en Dios disminuye y los pensamientos comienzan a desordenarse. Aparecen resentimientos, especulación y tensión emocional.</string>
+  <string id="faster_s">S — Speeding Up (Aceleración)</string>
+  <string id="faster_s_desc">Es la respuesta carnal a la ansiedad. En vez de detenerse y depender de Dios, la persona acelera: se ocupa en exceso, trabaja compulsivamente o llena su agenda para no enfrentar lo que siente. El hacer reemplaza el descansar en Dios.</string>
+  <string id="faster_t">T — Ticked Off (Enojarse / Irritación constante)</string>
+  <string id="faster_t_desc">La frustración acumulada se transforma en ira. Hay reacciones exageradas, orgullo y defensividad. La persona se vuelve más crítica, menos paciente y más propensa a conflictos.</string>
+  <string id="faster_e">E — Exhaustion (Agotamiento)</string>
+  <string id="faster_e_desc">Después de vivir en ansiedad, aceleración e ira, llega el colapso. Hay cansancio físico, emocional y espiritual. Se pierde el gozo y la claridad. Es un estado de vulnerabilidad extrema.</string>
+  <string id="faster_r">R — Relapse (Recaída)</string>
+  <string id="faster_r_desc">Es el retorno a conductas pecaminosas o adictivas previamente abandonadas. La persona cede al deseo, pierde control y experimenta culpa y vergüenza. Es el resultado final del proceso descendente si no se interrumpe antes.</string>
+  <string id="how_to_use">Cómo usar el programa: Recorre los pilares en orden. En cada uno marca las frases que describen tu situación, rellena «Comportamiento más poderoso» y las preguntas. Usa Atrás y Siguiente, o Fin para ir al resumen de pilares. El botón 💪 mueve esa frase a «Comportamiento más poderoso». Si rellenas un pilar, todos los anteriores también deben tener algo. Ver Resumen muestra el último pilar con datos y su consejo.</string>
+  <string id="btn_start">Iniciar</string>
+  <string id="btn_view_my_records">Ver mis registros</string>
+
+  <string id="title_most_powerful_tooltip">Mover a comportamiento más poderoso</string>
+  <string id="label_most_powerful">Comportamiento más poderoso</string>
+  <string id="label_q1">¿Cómo me afecta? ¿Cómo me siento en ese momento?</string>
+  <string id="label_q2">¿Cómo afecta a las personas importantes de mi vida?</string>
+  <string id="label_q3">¿Por qué lo hago? ¿Cuál es el beneficio para mí?</string>
+  <string id="btn_back">Atrás</string>
+  <string id="btn_next">Siguiente</string>
+  <string id="btn_pillars_summary">Revisar mis pilares</string>
+  <string id="btn_finish">Finalizar</string>
+
+  <string id="title_restoration">Restauración</string>
+  <string id="desc_restoration">Es el estado de caminar en la luz: viviendo sin ocultar pecado, practicando confesión, obediencia, gratitud y comunión con Dios y con otros creyentes. Refleja una vida alineada con la verdad, donde hay responsabilidad, humildad y crecimiento continuo en santificación.</string>
+  <string id="title_forgetting_priorities">Olvidar prioridades</string>
+  <string id="desc_forgetting_priorities">Es el inicio del enfriamiento espiritual. El corazón comienza a desplazarse de Dios hacia preocupaciones temporales. Aparecen secretos, distracciones y autosuficiencia. No es todavía caída abierta, pero sí una desviación interna del primer amor.</string>
+  <string id="title_anxiety">Ansiedad</string>
+  <string id="desc_anxiety">Es un estado donde el corazón pierde descanso en la soberanía de Dios y comienza a ser dominado por temor, pensamientos desordenados y emociones intensas. Refleja una pérdida práctica de confianza en el carácter y control providencial de Dios.</string>
+  <string id="title_speeding_up">Aceleración</string>
+  <string id="desc_speeding_up">Es una respuesta carnal a la ansiedad: hiperactividad, autosuficiencia y esfuerzo desmedido para controlar resultados. El hacer reemplaza el depender, y se pierde el descanso en Dios.</string>
+  <string id="title_getting_angry">Enojarse</string>
+  <string id="desc_getting_angry">Es cuando el orgullo y la frustración toman control. La ira pecaminosa reemplaza la mansedumbre, y el corazón se endurece. Se busca tener la razón más que reflejar el carácter de Cristo.</string>
+  <string id="title_exhaustion">Agotamiento</string>
+  <string id="desc_exhaustion">Es la consecuencia de vivir en tensión prolongada fuera del descanso en Dios. Hay pérdida de gozo y esperanza, y la persona funciona en modo supervivencia, vulnerable a recaer en patrones antiguos.</string>
+  <string id="title_relapse">Recaída</string>
+  <string id="desc_relapse">Es el retorno consciente a patrones de pecado previamente abandonados. Implica ceder al deseo, tomar control independiente de Dios y experimentar culpa y vergüenza renovadas.</string>
+
+  <string id="title_pilares">Pilares</string>
+  <string id="desc_pilares">Revisa qué pilares tienen información. Puedes ir a cualquiera para completar o editar.</string>
+  <string id="pillars_must_fill_this">Debes rellenar este pilar</string>
+  <string id="btn_view_summary">Ver Resumen</string>
+
+  <string id="title_summary">Resumen</string>
+  <string id="summary_you_are_at">Estás en</string>
+  <string id="btn_start_over">Empezar de Nuevo</string>
+  <string id="summary_most_powerful_behavior">Comportamiento más poderoso:</string>
+  <string id="summary_advice">Consejo:</string>
+  <string id="msg_no_data">No hay datos para mostrar.</string>
+
+  <string id="title_my_records">Mis registros</string>
+  <string id="btn_back">Volver</string>
+  <string id="btn_back_to_list">Volver al listado</string>
+  <string id="btn_export_html">Exportar HTML</string>
+  <string id="btn_delete_all">Borrar todos</string>
+  <string id="msg_no_records">Aún no hay registros guardados.</string>
+  <string id="msg_history_instructions">Marca los registros que quieras exportar y pulsa Exportar HTML. Haz clic en un registro para verlo completo.</string>
+  <string id="msg_record_not_found">Registro no encontrado.</string>
+  <string id="msg_no_data_short">Sin datos.</string>
+
+  <string id="btn_close">Cerrar</string>
+  <string id="confirm_yes_delete_all">Sí, borrar todo</string>
+  <string id="confirm_no_cancel">No, cancelar</string>
+  <string id="confirm_delete_all_message">¿Estás seguro de que quieres borrar todos los registros? Esta acción no se puede deshacer.</string>
+
+  <string id="msg_validation_fill_all">Si marcas al menos una casilla, debes rellenar todos los campos de texto: {0}.</string>
+  <string id="msg_complete_one_pillar">Debes completar al menos un pilar.</string>
+  <string id="msg_fill_previous_pillars">Hay pilares que no has completado. Debes volver y rellenar: {0}.</string>
+  <string id="msg_record_saved">Registro guardado.</string>
+  <string id="msg_select_one_export">Selecciona al menos un registro para exportar.</string>
+  <string id="export_records_title">F.A.S.T.E.R. — Registros exportados</string>
+  <string id="record_label">Registro —</string>
+  <string id="date_label">Fecha:</string>
+
+  <!-- Consejos -->
+  <string id="advice_restoration">Permanece en la Palabra diariamente, ora de manera constante, mantén comunión activa con otros creyentes y practica confesión inmediata cuando falles. La perseverancia en los medios de gracia (Escritura, oración, iglesia y rendición de cuentas) es lo que sostiene la restauración.</string>
+  <string id="advice_forgetting_priorities">Reconoce la desviación y arrepiéntete deliberadamente. Restablece tiempos definidos de oración y Escritura, busca rendición de cuentas y elimina distracciones que compiten con tu comunión con Dios. La restauración comienza cuando vuelves a poner a Dios en primer lugar.</string>
+  <string id="advice_anxiety">Renueva tu mente con la verdad bíblica. Sustituye pensamientos especulativos por promesas claras de la Escritura. Ora entregando tus cargas a Dios con acción de gracias. La paz crece cuando la verdad gobierna la mente.</string>
+  <string id="advice_speeding_up">Practica reposo intencional. Reduce actividades innecesarias y establece tiempos de silencio, oración y reflexión bíblica. Recuerda que la fidelidad no se mide por actividad, sino por obediencia dependiente.</string>
+  <string id="advice_getting_angry">Confiesa el orgullo que alimenta la ira. Practica humildad deliberada y busca reconciliación rápida. Medita en la gracia que has recibido, y permite que esa misericordia moldee tu trato hacia otros.</string>
+  <string id="advice_exhaustion">Vuelve a lo esencial: descanso físico adecuado, oración sincera y comunión con creyentes maduros. No intentes resolver todo de inmediato; prioriza restaurar tu relación con Dios y confiar en Su gracia sustentadora.</string>
+  <string id="advice_relapse">No te escondas en la vergüenza. Confiesa inmediatamente, arrepiéntete genuinamente y elimina las fuentes de tentación. Aférrate al evangelio: hay perdón real y poder para levantarte nuevamente en obediencia.</string>
+
+  <!-- Checkboxes Restauración (0-6) -->
+  <string id="cb_restoration_0">Esta semana fui honesto conmigo mismo y con otros, sin secretos importantes</string>
+  <string id="cb_restoration_1">Trabajé activamente para resolver problemas pendientes</string>
+  <string id="cb_restoration_2">Identifiqué mis miedos y sentimientos y los enfrenté</string>
+  <string id="cb_restoration_3">Mantengo mis compromisos con reuniones, oración, familia y amigos</string>
+  <string id="cb_restoration_4">Practiqué la gratitud y la vulnerabilidad con los demás</string>
+  <string id="cb_restoration_5">Aumenté mi conexión y confianza en Dios y en personas significativas</string>
+  <string id="cb_restoration_6">Me mostré abierto, honesto y con contacto visual en interacciones importantes</string>
+
+  <!-- Checkboxes Olvidar prioridades (0-17) -->
+  <string id="cb_forgetting_priorities_0">He mantenido secretos que afectan mi vida espiritual o relaciones</string>
+  <string id="cb_forgetting_priorities_1">He pasado menos tiempo o energía en oración, reuniones o actividades de la iglesia</string>
+  <string id="cb_forgetting_priorities_2">He evitado a personas de apoyo o responsabilidad</string>
+  <string id="cb_forgetting_priorities_3">He tenido conversaciones superficiales en lugar de profundas</string>
+  <string id="cb_forgetting_priorities_4">He cambiado mis metas o prioridades importantes sin razón clara</string>
+  <string id="cb_forgetting_priorities_5">He estado obsesionado con relaciones o asuntos materiales</string>
+  <string id="cb_forgetting_priorities_6">He roto promesas o compromisos</string>
+  <string id="cb_forgetting_priorities_7">He descuidado a mi familia o personas cercanas</string>
+  <string id="cb_forgetting_priorities_8">He buscado controlar situaciones o a otras personas</string>
+  <string id="cb_forgetting_priorities_9">Me he distraído con entretenimiento, TV, computadora u ocio excesivo</string>
+  <string id="cb_forgetting_priorities_10">He mentido o exagerado para mejorar mi imagen frente a otros</string>
+  <string id="cb_forgetting_priorities_11">He usado sarcasmo o actitudes pasivo-agresivas</string>
+  <string id="cb_forgetting_priorities_12">Me he aislado emocionalmente de otros</string>
+  <string id="cb_forgetting_priorities_13">He procrastinado asuntos importantes</string>
+  <string id="cb_forgetting_priorities_14">He actuado con exceso de confianza minimizando riesgos</string>
+  <string id="cb_forgetting_priorities_15">He sentido aburrimiento constante que me lleva a distraerme</string>
+  <string id="cb_forgetting_priorities_16">He escondido dinero o información financiera</string>
+  <string id="cb_forgetting_priorities_17">He negado problemas reales o he huido de conversaciones importantes</string>
+
+  <!-- Checkboxes Ansiedad (0-13) -->
+  <string id="cb_anxiety_0">Me he preocupado constantemente o he sentido miedo indefinido</string>
+  <string id="cb_anxiety_1">He usado palabras groseras o he estado irritable</string>
+  <string id="cb_anxiety_2">He sentido resentimiento hacia alguien</string>
+  <string id="cb_anxiety_3">He juzgado las intenciones o motivos de otros</string>
+  <string id="cb_anxiety_4">He intentado hacer metas o listas que no puedo cumplir</string>
+  <string id="cb_anxiety_5">He &quot;leído la mente&quot; de otros sin evidencia</string>
+  <string id="cb_anxiety_6">He fantaseado o intentado rescatar a otros de forma codependiente</string>
+  <string id="cb_anxiety_7">He tenido problemas de concentración o sueño</string>
+  <string id="cb_anxiety_8">He buscado o creado drama innecesario</string>
+  <string id="cb_anxiety_9">He usado medicamentos sin receta (para dolor, sueño o control de peso)</string>
+  <string id="cb_anxiety_10">He coqueteado inapropiadamente</string>
+  <string id="cb_anxiety_11">He repetido viejos pensamientos negativos sobre mí o mi pasado</string>
+  <string id="cb_anxiety_12">He actuado desde el perfeccionismo o miedo a equivocarme</string>
+  <string id="cb_anxiety_13">He participado en chismes o conversaciones dañinas sobre otros</string>
+
+  <!-- Checkboxes Aceleración (0-14) -->
+  <string id="cb_speeding_up_0">Me he mantenido súper ocupado para evitar mis emociones</string>
+  <string id="cb_speeding_up_1">He trabajado en exceso o me he sentido adicto al trabajo</string>
+  <string id="cb_speeding_up_2">He evitado relajarme o disminuir el ritmo</string>
+  <string id="cb_speeding_up_3">He sentido impulsividad o dificultad para apagar los pensamientos</string>
+  <string id="cb_speeding_up_4">He saltado comidas o he tenido atracones de comida</string>
+  <string id="cb_speeding_up_5">He gastado dinero en exceso</string>
+  <string id="cb_speeding_up_6">He tenido dificultad para identificar mis sentimientos o necesidades</string>
+  <string id="cb_speeding_up_7">He repetido pensamientos negativos constantemente</string>
+  <string id="cb_speeding_up_8">He estado irritable o con cambios de humor drásticos</string>
+  <string id="cb_speeding_up_9">He consumido demasiada cafeína o estimulantes</string>
+  <string id="cb_speeding_up_10">He hecho exceso de ejercicio</string>
+  <string id="cb_speeding_up_11">He tenido dificultad para estar solo o con otros</string>
+  <string id="cb_speeding_up_12">He puesto excusas para &quot;hacerlo todo&quot;</string>
+  <string id="cb_speeding_up_13">He sentido nerviosismo físico constante</string>
+  <string id="cb_speeding_up_14">He tenido dificultad real para escuchar a los demás con atención</string>
+
+  <!-- Checkboxes Enojarse (0-13) -->
+  <string id="cb_getting_angry_0">He procrastinado causando problemas en trabajo, dinero o relaciones</string>
+  <string id="cb_getting_angry_1">He aumentado el sarcasmo o comentarios hirientes</string>
+  <string id="cb_getting_angry_2">He pensado en términos &quot;todo o nada&quot;</string>
+  <string id="cb_getting_angry_3">Me he sentido solo o incomprendido</string>
+  <string id="cb_getting_angry_4">He reaccionado exageradamente o con rabia</string>
+  <string id="cb_getting_angry_5">He tenido resentimientos constantes</string>
+  <string id="cb_getting_angry_6">He alejado a otros o aumentado mi aislamiento</string>
+  <string id="cb_getting_angry_7">He culpado a otros o discutido</string>
+  <string id="cb_getting_angry_8">He tenido pensamiento irracional o no he aceptado críticas</string>
+  <string id="cb_getting_angry_9">He estado a la defensiva o necesitado tener la razón</string>
+  <string id="cb_getting_angry_10">He tenido problemas físicos por estrés (dolor de cabeza, digestión)</string>
+  <string id="cb_getting_angry_11">He tenido pensamientos obsesivos o dificultad para perdonar</string>
+  <string id="cb_getting_angry_12">He sentido superioridad o intimidado a otros</string>
+  <string id="cb_getting_angry_13">He notado que las personas me evitan debido a mi actitud o reacciones</string>
+
+  <!-- Checkboxes Agotamiento (0-16) -->
+  <string id="cb_exhaustion_0">Me he sentido deprimido, abrumado o desesperanzado</string>
+  <string id="cb_exhaustion_1">He tenido ataques de pánico o confusión</string>
+  <string id="cb_exhaustion_2">He dormido demasiado o muy poco</string>
+  <string id="cb_exhaustion_3">He sentido que no puedo hacer frente a la situación</string>
+  <string id="cb_exhaustion_4">He llorado sin razón aparente</string>
+  <string id="cb_exhaustion_5">He olvidado cosas importantes</string>
+  <string id="cb_exhaustion_6">He tenido pensamientos negativos sobre mí mismo o pesimistas</string>
+  <string id="cb_exhaustion_7">He sentido impotencia, cansancio o entumecimiento</string>
+  <string id="cb_exhaustion_8">He querido huir o escapar</string>
+  <string id="cb_exhaustion_9">He tenido antojos de antiguas conductas destructivas</string>
+  <string id="cb_exhaustion_10">He buscado personas o lugares insanos</string>
+  <string id="cb_exhaustion_11">Me he aislado mucho</string>
+  <string id="cb_exhaustion_12">Otros se han enfadado conmigo por mi comportamiento</string>
+  <string id="cb_exhaustion_13">Me he maltratado o descuidado</string>
+  <string id="cb_exhaustion_14">He tenido pensamientos suicidas o desesperanza intensa</string>
+  <string id="cb_exhaustion_15">He faltado a compromisos o trabajo importantes</string>
+  <string id="cb_exhaustion_16">He estado funcionando en &quot;modo supervivencia&quot;, haciendo solo lo mínimo para pasar el día</string>
+
+  <!-- Checkboxes Recaída (0-6) -->
+  <string id="cb_relapse_0">He cedido y perdido control sobre mis conductas adictivas</string>
+  <string id="cb_relapse_1">Me he mentido a mí mismo o a otros sobre mi situación</string>
+  <string id="cb_relapse_2">Me he sentido incapaz de manejar la vida sin recurrir a conductas pasadas</string>
+  <string id="cb_relapse_3">He experimentado culpa, vergüenza o condena intensa</string>
+  <string id="cb_relapse_4">Me he sentido abandonado o solo</string>
+  <string id="cb_relapse_5">He vuelto a los comportamientos de los que prometí no regresar</string>
+  <string id="cb_relapse_6">He decidido manejar mi vida en mis propios términos en lugar de confiar en Dios</string>
+</strings>
