@@ -7,6 +7,8 @@
     "build": "tsc",
     "copy-web": "npm run build && node scripts/copy-www.js",
     "cap-sync": "npm run copy-web && npx cap sync",
+    "android": "bash scripts/android",
+    "ios": "bash scripts/ios",
     "test:unit": "vitest run",
     "test:unit:watch": "vitest"
   },
@@ -15,10 +17,11 @@
     "@capacitor/app": "8.0.1",
     "@capacitor/cli": "8.1.0",
     "@capacitor/core": "8.1.0",
-    "@capacitor/ios": "8.1.0"
+    "@capacitor/ios": "8.1.0",
+    "@capacitor/preferences": "8.0.1"
   },
   "devDependencies": {
     "typescript": "5.9.3",
-    "vitest": "^2.1.0"
+    "vitest": "4.1.0"
   }
 }

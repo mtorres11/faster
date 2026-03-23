@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Stop the local dev HTTP server and free PORT (default 8080).
+# Usage: ./stop   or   PORT=9000 ./stop
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+PORT="${PORT:-8080}"
+PIDFILE="$ROOT/.dev-server.pid"
+
+if [[ -f "$PIDFILE" ]]; then
+  PID="$(cat "$PIDFILE" 2>/dev/null || true)"
+  if [[ -n "$PID" ]] && kill -0 "$PID" 2>/dev/null; then
+    kill "$PID" 2>/dev/null || true
+  fi
+  rm -f "$PIDFILE"
+fi
+
+# Anything still bound to PORT (orphan or other http.server)
+if command -v lsof >/dev/null 2>&1; then
+  PIDS=$(lsof -ti ":$PORT" 2>/dev/null || true)
+  for p in $PIDS; do
+    [[ -n "$p" ]] && kill "$p" 2>/dev/null || true
+  done
+fi
+
+echo "Stopped. Port $PORT should be free."
+exit 0

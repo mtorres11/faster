@@ -21,10 +21,11 @@ function copyDirSync(src, dest) {
   }
 }
 
-// After src/ reorg: app is built from src/app.ts -> dist/app.js. Must run "npm run build" first.
-const distApp = path.join(root, 'dist', 'app.js');
-if (!fs.existsSync(distApp)) {
-  console.error('Error: dist/app.js not found. Run "npm run build" (or "npm run copy-web") first.');
+// After modular src/: tsc emits dist/shell/main.js + dist/core/... (ES modules). Must run "npm run build" first.
+const distDir = path.join(root, 'dist');
+const distMain = path.join(distDir, 'shell', 'main.js');
+if (!fs.existsSync(distMain)) {
+  console.error('Error: dist/shell/main.js not found. Run "npm run build" (or "npm run copy-web") first.');
   process.exit(1);
 }
 
@@ -32,7 +33,14 @@ fs.mkdirSync(wwwDir, { recursive: true });
 fs.copyFileSync(path.join(root, 'index.html'), path.join(wwwDir, 'index.html'));
 copyDirSync(path.join(root, 'theme'), path.join(wwwDir, 'theme'));
 copyDirSync(path.join(root, 'lang'), path.join(wwwDir, 'lang'));
-fs.mkdirSync(path.join(wwwDir, 'scripts'), { recursive: true });
-fs.copyFileSync(distApp, path.join(wwwDir, 'scripts', 'app.js'));
+const dataDir = path.join(root, 'data');
+const wwwData = path.join(wwwDir, 'data');
+if (fs.existsSync(dataDir)) {
+  copyDirSync(dataDir, wwwData);
+}
+const scriptsWww = path.join(wwwDir, 'scripts');
+fs.mkdirSync(scriptsWww, { recursive: true });
+// Copy entire dist tree so relative imports (./core/...) resolve under scripts/
+copyDirSync(distDir, scriptsWww);
 
-console.log('Copied index.html, theme/, lang/, dist/app.js -> www/scripts/');
+console.log('Copied index.html, theme/, lang/, data/, dist/* -> www/scripts/');

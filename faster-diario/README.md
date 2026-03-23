@@ -27,10 +27,21 @@ Offline self-assessment app for the FASTER scale (Restoration, Forgetting priori
 
 ## Run locally (browser)
 
-No build step:
+From the **project root** (`faster-diario/`):
 
-- **Option 1:** Open `index.html` in the browser (double-click or drag into the window).
-- **Option 2:** Use **Live Server** in VS Code/Cursor: right-click `index.html` → “Open with Live Server”.
+```bash
+./start
+```
+
+**After you change** `src/`, `index.html`, `theme/`, `lang/`, or `data/`, run **`./start` again** (it rebuilds, copies into `www/`, and restarts the dev server steps it documents). Use **`./stop`** first if you only want to free the port without rebuilding.
+
+- **`./start`** — frees the port if needed → **`npm run copy-web`** (TypeScript build + copy to `www/`) → serves **`www/`** with Python’s HTTP server in the **background** (default port **8080**). On macOS it also **opens the browser** unless you set `OPEN_BROWSER=0`.
+- **`PORT=9000 ./start`** — use another port.
+- **`./stop`** — stops the server and frees the port.
+
+**Without the scripts:** `npm run copy-web`, `cd www`, `python3 -m http.server 8080` — or **Live Server** on `www/index.html`.
+
+**Native (Capacitor):** use **`./update.sh`** or **`npm run cap-sync`** when you need Android/iOS projects updated — not part of `./start`.
 
 ---
 
@@ -64,11 +75,27 @@ npx cap add ios
 npm run cap-sync
 ```
 
-- `copy-web` copies `index.html`, `theme/`, `scripts/app.js`, and `lang/` into `www/` (Capacitor’s web root).
+- `copy-web` copies `index.html`, `theme/`, `data/`, full `dist/` → `www/scripts/`, and `lang/` into `www/` (Capacitor’s web root). The app entry is `scripts/shell/main.js` (ES modules; mirrors `dist/shell/main.js`).
 - `@capacitor/app` is needed so the Android back button is handled in the native app.
 - After adding platforms, `cap-sync` copies web assets into the native projects.
 
 ### 2. Run on device or emulator
+
+**One command (update deps, build web, sync, run simulator/emulator):**
+
+```bash
+npm run android
+```
+
+```bash
+npm run ios
+```
+
+These run `scripts/android` and `scripts/ios`: `npm install` → `npm run copy-web` → `npx cap run android` / `npx cap run ios` (Capacitor syncs, builds the native app, installs, and launches the Android emulator or iOS Simulator). You can also run `./scripts/android` or `./scripts/ios` from the project root.
+
+Pick a specific device: `CAP_TARGET=<id> npm run android` (or `ios`) — list IDs with `npx cap run android --list` / `npx cap run ios --list`.
+
+**Open the IDE only (build/run yourself):**
 
 ```bash
 npx cap open android
@@ -86,7 +113,7 @@ Then build and run from Android Studio or Xcode (device or emulator).
 
 ### 3. After changing the web app
 
-Whenever you change `index.html`, `theme/`, `scripts/app.js`, or `lang/`:
+Whenever you change `index.html`, `theme/`, `src/` (TypeScript), `data/`, or `lang/`:
 
 ```bash
 npm run cap-sync
@@ -96,19 +123,16 @@ Then run again from the IDE so the native app loads the latest web assets.
 
 ### 4. Before publishing to the stores
 
-- **App icon and splash:** Add PNGs (e.g. 1024×1024 icon). See **docs/BACKLOG.md** for sizes and where to put them.
-- **Privacy policy:** Publish the policy text (draft in docs/BACKLOG.md) on a web page and add the URL in Google Play Console and App Store Connect.
+- **App icon and splash:** Add PNGs (e.g. 1024×1024 icon). Sizes and checklist are in **docs/DOCUMENTATION.md**.
+- **Privacy policy:** Publish the policy text (draft in **docs/DOCUMENTATION.md**) on a web page and add the URL in Google Play Console and App Store Connect.
 - **Store listing:** Create the app in Play Console and App Store Connect; fill descriptions, category, content rating, Data Safety / App Privacy; upload screenshots; sign and submit.
 
-Details, checklist, refactor and testing plans, and optional improvements are in **docs/BACKLOG.md**. Code and extraction analysis: **docs/CODE-ANALYSIS.md**, **docs/EXTRACTION-ANALYSIS.md**.
+All project docs (backlog, architecture, code/extraction notes, refactor progress, Android/iOS troubleshooting) live in one file: **docs/DOCUMENTATION.md**.
 
 ---
 
-## Documentation (`docs/`)
+## Documentation
 
 | File | Contents |
 |------|----------|
-| **BACKLOG.md** | Current status, full task list, refactor plan, testing plan, manual/store checklist, asset sizes, privacy draft, project layout. |
-| **ARCHITECTURE.md** | Target `src/` and `tests/` layout (core, features, infrastructure); rule: create folders only when they contain code. |
-| **CODE-ANALYSIS.md** | Red/green flags and recommended patterns for the codebase. |
-| **EXTRACTION-ANALYSIS.md** | Extractable modules and smaller methods (no behavior change). |
+| **docs/DOCUMENTATION.md** | Single reference: backlog & status, refactor & testing, architecture, code analysis, extraction notes, modular refactor progress, Android/iOS troubleshooting. |

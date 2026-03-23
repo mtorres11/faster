@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+#
+# =============================================================================
+# iOS — update deps, build web → www/, sync, run on Xcode Simulator
+# =============================================================================
+#
+# From project root:
+#   npm run ios
+#   ./scripts/ios
+#
+#   1. npm install       — refresh node_modules
+#   2. npm run copy-web  — tsc + copy to www/
+#   3. npx cap run ios    — cap sync + xcodebuild + Simulator + install app
+#
+# Requires: ios/ (Capacitor), Xcode + Simulator.
+# Optional: CAP_TARGET=<udid> (see: npx cap run ios --list)
+#
+# Note: Cannot be named ./ios at repo root — that folder is the Capacitor iOS project.
+#
+# =============================================================================
+
+set -e
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+echo "→ npm install ..."
+npm install
+
+echo "→ npm run copy-web (build + www/) ..."
+npm run copy-web
+
+if [[ -n "${CAP_TARGET:-}" ]]; then
+  echo "→ npx cap run ios --target ${CAP_TARGET} ..."
+  exec npx cap run ios --target "${CAP_TARGET}"
+else
+  echo "→ npx cap run ios (sync, build, Simulator) ..."
+  exec npx cap run ios
+fi

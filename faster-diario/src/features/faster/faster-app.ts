@@ -1,42 +1,24 @@
-/** Single pillar form data (checked indices + text fields). */
-interface PillarRecord {
-  checked: number[];
-  poderoso: string;
-  q1: string;
-  q2: string;
-  q3: string;
-}
-
-/** Stored historial entry (date + compact pillar data). */
-interface HistorialItem {
-  fecha?: string;
-  data?: Record<string, Partial<PillarRecord>>;
-}
-
-/** All pillars' form data keyed by pillar id. */
-type PillarData = Record<string, PillarRecord>;
-
-const PILLAR_IDS = ['restauracion', 'olvidar', 'ansiedad', 'aceleracion', 'enojarse', 'agotamiento', 'recaida'];
-
-const PILLAR_ID_TO_LANG_SUFFIX = { restauracion: 'restoration', olvidar: 'forgetting_priorities', ansiedad: 'anxiety', aceleracion: 'speeding_up', enojarse: 'getting_angry', agotamiento: 'exhaustion', recaida: 'relapse' };
-function pillarLangKey(pillarId: string) { return PILLAR_ID_TO_LANG_SUFFIX[pillarId] || pillarId; }
-
-const CHECKBOX_COUNTS = { restauracion: 7, olvidar: 18, ansiedad: 14, aceleracion: 15, enojarse: 14, agotamiento: 17, recaida: 7 };
-const CHECKBOX_IDS: Record<string, string[]> = {};
-PILLAR_IDS.forEach(function(pid) {
-  const suffix = PILLAR_ID_TO_LANG_SUFFIX[pid];
-  const n = CHECKBOX_COUNTS[pid] || 0;
-  CHECKBOX_IDS[pid] = [];
-  for (let j = 0; j < n; j++) CHECKBOX_IDS[pid].push('cb_' + suffix + '_' + j);
-});
-
-const LABEL_NAME_TO_KEY = { poderoso: 'label_most_powerful', q1: 'label_q1', q2: 'label_q2', q3: 'label_q3' };
+import type { HistorialItem, PillarData, PillarRecord } from '../../core/domain/types.js';
+import {
+  CHECKBOX_IDS,
+  LABEL_NAME_TO_KEY,
+  PILLAR_IDS,
+  pillarLangKey,
+} from '../../core/domain/pillar-constants.js';
+import {
+  compactData as compactDataCore,
+  computePillarOrderIssues,
+  getLastFilledPillarIndex as getLastFilledPillarIndexCore,
+  getLastPillarWithData as getLastPillarWithDataCore,
+  getPillarStepIndex as getPillarStepIndexCore,
+  hasAnyData,
+  migrateDataKeys,
+  recordHasAnyData,
+} from '../../core/services/record-helpers.js';
 
 const STORAGE_LAST_RECORD = 'ultimoRegistro';
 const STORAGE_HISTORY = 'historialFASTER';
 const STORAGE_LANG = 'fasterLang';
-
-const PILLAR_NAME_TO_ID: Record<string, string> = { 'Restauración':'restauracion', 'Olvidar prioridades':'olvidar', 'Ansiedad':'ansiedad', 'Aceleración':'aceleracion', 'Enojarse':'enojarse', 'Agotamiento':'agotamiento', 'Recaída':'recaida' };
 
 function getEl(id: string) {
   return document.getElementById(id);
@@ -51,21 +33,7 @@ function getHistorial(): HistorialItem[] {
 }
 
 function getLastFilledPillarIndex(data: PillarData) {
-  let last = -1;
-  for (let i = 0; i < PILLAR_IDS.length; i++) {
-    if (data[PILLAR_IDS[i]] && hasAnyData(data[PILLAR_IDS[i]])) last = i;
-  }
-  return last;
-}
-
-function migrateDataKeys(data: Record<string, unknown> | null | undefined) {
-  if (!data || typeof data !== 'object') return data;
-  const out: Record<string, unknown> = {};
-  for (const k in data) {
-    const id = PILLAR_NAME_TO_ID[k] || k;
-    out[id] = data[k];
-  }
-  return out;
+  return getLastFilledPillarIndexCore(data, PILLAR_IDS);
 }
 
 let strings: Record<string, string> = {};
@@ -146,6 +114,8 @@ function applyI18n() {
   if (stepPrev) stepPrev.setAttribute('aria-label', getString('btn_back'));
   const stepNext = document.querySelector('.step-next');
   if (stepNext) stepNext.setAttribute('aria-label', getString('btn_next'));
+  const floatBack = document.getElementById('floating-back');
+  if (floatBack) floatBack.setAttribute('aria-label', getString('btn_back'));
 }
 
 let currentStepIndex = 0;
@@ -228,7 +198,7 @@ function goBack() {
   const currentStep = steps[currentStepIndex];
   const isPillarsStep = currentStep && (currentStep as HTMLElement).id === 'step-pillars';
   if (isPillarsStep && finishFromPillar) {
-    showStep(getPillarStepIndex(finishFromPillar) + 1);
+    showStep(getPillarStepIndexCore(finishFromPillar, PILLAR_IDS) + 1);
   } else {
     showStep(currentStepIndex - 1);
   }
@@ -362,77 +332,24 @@ function collectAllData(): PillarData {
   return data;
 }
 
-function hasAnyData(record: Partial<PillarRecord>) {
-  const r = record as { checked?: number[]; poderoso?: string };
-  return (r.checked?.length ?? 0) > 0 || (r.poderoso != null && r.poderoso.trim() !== '');
-}
-
-function recordHasAnyData(rec: Partial<PillarRecord> | null | undefined) {
-  if (!rec) return false;
-  const c = rec.checked && rec.checked.length > 0;
-  const p = rec.poderoso && String(rec.poderoso).trim() !== '';
-  const q1 = rec.q1 && String(rec.q1).trim() !== '';
-  const q2 = rec.q2 && String(rec.q2).trim() !== '';
-  const q3 = rec.q3 && String(rec.q3).trim() !== '';
-  return c || p || q1 || q2 || q3;
-}
-
-function compactData(data: Record<string, Partial<PillarRecord>>) {
-  const out: Record<string, Partial<PillarRecord> & { checked: number[] }> = {};
-  PILLAR_IDS.forEach(pillarId => {
-    const rec = data[pillarId];
-    if (!rec || !recordHasAnyData(rec)) return;
-    const compactRec: Partial<PillarRecord> & { checked: number[] } = { checked: rec.checked || [] };
-    if (rec.poderoso && String(rec.poderoso).trim() !== '') compactRec.poderoso = rec.poderoso.trim();
-    if (rec.q1 && String(rec.q1).trim() !== '') compactRec.q1 = rec.q1.trim();
-    if (rec.q2 && String(rec.q2).trim() !== '') compactRec.q2 = rec.q2.trim();
-    if (rec.q3 && String(rec.q3).trim() !== '') compactRec.q3 = rec.q3.trim();
-    out[pillarId] = compactRec;
-  });
-  return out;
-}
-
 function validatePillarsOrder(data: Record<string, Partial<PillarRecord>>) {
-  let lastFilledIndex = -1;
-  for (let i = 0; i < PILLAR_IDS.length; i++) {
-    const rec = data[PILLAR_IDS[i]];
-    if (rec && hasAnyData(rec)) lastFilledIndex = i;
-  }
-  if (lastFilledIndex === -1) {
+  const issues = computePillarOrderIssues(data, PILLAR_IDS);
+  if (issues.kind === 'empty') {
     return { valid: false, missingPillars: [] as string[], message: getString('msg_complete_one_pillar') };
   }
-  const missingPillars: string[] = [];
-  for (let i = 0; i < lastFilledIndex; i++) {
-    const rec = data[PILLAR_IDS[i]];
-    if (!rec || !hasAnyData(rec)) missingPillars.push(PILLAR_IDS[i]);
-  }
-  if (missingPillars.length === 0) {
+  if (issues.kind === 'ok') {
     return { valid: true, missingPillars: [] };
   }
-  const missingNames = missingPillars.map(id => getString('title_' + pillarLangKey(id))).join(', ');
-  return { valid: false, missingPillars, message: getString('msg_fill_previous_pillars').replace('{0}', missingNames) };
-}
-
-function getPillarStepIndex(pillarId: string) {
-  const idx = PILLAR_IDS.indexOf(pillarId);
-  return idx >= 0 ? idx : 0;
-}
-
-function getLastPillarWithData(data: Record<string, Partial<PillarRecord>>) {
-  let last: string | null = null;
-  PILLAR_IDS.forEach(pillarId => {
-    const rec = data[pillarId];
-    if (rec && hasAnyData(rec)) last = pillarId;
-  });
-  return last;
+  const missingNames = issues.missingPillars.map((id) => getString('title_' + pillarLangKey(id))).join(', ');
+  return {
+    valid: false,
+    missingPillars: issues.missingPillars,
+    message: getString('msg_fill_previous_pillars').replace('{0}', missingNames),
+  };
 }
 
 function renderPillarsOverview(data: Record<string, Partial<PillarRecord>>) {
-  let lastFilledIndex = -1;
-  for (let i = 0; i < PILLAR_IDS.length; i++) {
-    const rec = data[PILLAR_IDS[i]];
-    if (rec && hasAnyData(rec)) lastFilledIndex = i;
-  }
+  const lastFilledIndex = getLastFilledPillarIndexCore(data, PILLAR_IDS);
   const container = document.getElementById('pillars-list');
   if (!container) return;
   let html = '';
@@ -471,7 +388,7 @@ function renderSummary(data: Record<string, Partial<PillarRecord>>, _fromPillar:
   const titleEl = document.getElementById('summary-title');
   if (!container || !titleEl) return;
 
-  const displayPillar = getLastPillarWithData(data);
+  const displayPillar = getLastPillarWithDataCore(data, PILLAR_IDS);
   titleEl.textContent = (displayPillar ? getString('summary_you_are_at') + ' ' + getString('title_' + pillarLangKey(displayPillar)) : getString('title_summary'));
 
   const rec = displayPillar && data[displayPillar] ? data[displayPillar] : null;
@@ -674,7 +591,7 @@ function goToSummary() {
   localStorage.setItem(STORAGE_LAST_RECORD, JSON.stringify(data));
   const historyList = getHistorial();
   const dateStr = new Date().toLocaleString(currentLang === 'es_la' ? 'es' : 'en-US');
-  historyList.push({ fecha: dateStr, data: compactData(data) });
+  historyList.push({ fecha: dateStr, data: compactDataCore(data, PILLAR_IDS) });
   localStorage.setItem(STORAGE_HISTORY, JSON.stringify(historyList));
   showMessage(getString('msg_record_saved'), false);
   renderSummary(data, finishFromPillar);
@@ -751,7 +668,7 @@ function bindNav() {
     optionsDropdown.addEventListener('click', function(e) { e.stopPropagation(); });
     document.addEventListener('click', function() { closeOptionsMenu(); });
     const optHomeEl = document.getElementById('opt-home');
-    if (optHomeEl) optHomeEl.addEventListener('click', function() { showStep(0); closeOptionsMenu(); });
+    if (optHomeEl) optHomeEl.addEventListener('click', function() { closeOptionsMenu(); });
     const optProfileEl = document.getElementById('opt-profile');
     if (optProfileEl) optProfileEl.addEventListener('click', function() { closeOptionsMenu(); });
     const optLogoutEl = document.getElementById('opt-logout');
@@ -772,27 +689,63 @@ function bindNav() {
     try {
       const Cap = (window as unknown as { Capacitor: { Plugins: { App: { addListener: (event: string, cb: () => void) => void; exitApp?: () => void } } } }).Capacitor.Plugins.App;
       Cap.addListener('backButton', function() {
+        const landingEl = document.getElementById('view-landing');
+        if (landingEl && landingEl.classList.contains('active')) {
+          if (Cap.exitApp) Cap.exitApp();
+          return;
+        }
         if (currentStepIndex > 0) {
           goBack();
         } else {
-          if (Cap.exitApp) Cap.exitApp();
+          window.dispatchEvent(new CustomEvent('app:go-landing'));
         }
       });
     } catch (e) {}
   }
 }
 
-loadLang(currentLang).then(function() {
-  applyI18n();
-  bindNav();
-  const langSelect = document.getElementById('lang-menu');
-  if (langSelect) (langSelect as HTMLSelectElement).value = currentLang;
-  document.documentElement.lang = currentLang === 'es_la' ? 'es' : 'en';
+/**
+ * Handle “back” inside the FASTER wizard (steps + historial). Returns true if navigation was
+ * handled so the shell should not also show the landing page.
+ */
+export function performFasterBack(): boolean {
+  const faster = document.getElementById('view-faster');
+  if (!faster?.classList.contains('active')) return false;
+  const activeStep = document.querySelector('#wizard .step.active') as HTMLElement | null;
+  const sid = activeStep?.id;
+  if (sid === 'step-history') {
+    const btn = document.getElementById('btn-history-back');
+    if (btn) {
+      btn.click();
+      return true;
+    }
+  }
+  if (currentStepIndex > 0) {
+    goBack();
+    return true;
+  }
+  return false;
+}
+
+/** Reset FASTER wizard to the intro step (after opening from the home landing). */
+export function goToFasterIntro(): void {
+  hideMessage();
   showStep(0);
-}).catch(function() {
-  bindNav();
-  const langSelect = document.getElementById('lang-menu');
-  if (langSelect) (langSelect as HTMLSelectElement).value = currentLang;
-  document.documentElement.lang = currentLang === 'es_la' ? 'es' : 'en';
-  showStep(0);
-});
+}
+
+export function bootstrapFasterApp(): void {
+  loadLang(currentLang).then(function() {
+    applyI18n();
+    bindNav();
+    const langSelect = document.getElementById('lang-menu');
+    if (langSelect) (langSelect as HTMLSelectElement).value = currentLang;
+    document.documentElement.lang = currentLang === 'es_la' ? 'es' : 'en';
+    showStep(0);
+  }).catch(function() {
+    bindNav();
+    const langSelect = document.getElementById('lang-menu');
+    if (langSelect) (langSelect as HTMLSelectElement).value = currentLang;
+    document.documentElement.lang = currentLang === 'es_la' ? 'es' : 'en';
+    showStep(0);
+  });
+}

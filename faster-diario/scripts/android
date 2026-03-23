@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+#
+# =============================================================================
+# Android — update deps, build web → www/, sync, run on emulator
+# =============================================================================
+#
+# From project root:
+#   npm run android
+#   ./scripts/android
+#
+#   1. npm install          — refresh node_modules
+#   2. npm run copy-web     — tsc + copy to www/
+#   3. npx cap run android  — cap sync + Gradle build + install + launch emulator
+#
+# Requires: android/ (Capacitor), Android Studio + SDK + an AVD.
+# Optional: CAP_TARGET=<device-id> (see: npx cap run android --list)
+#
+# Note: Cannot be named ./android at repo root — that folder is the Capacitor Android project.
+#
+# =============================================================================
+
+set -e
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+echo "→ npm install ..."
+npm install
+
+echo "→ npm run copy-web (build + www/) ..."
+npm run copy-web
+
+if [[ -n "${CAP_TARGET:-}" ]]; then
+  echo "→ npx cap run android --target ${CAP_TARGET} ..."
+  exec npx cap run android --target "${CAP_TARGET}"
+else
+  echo "→ npx cap run android (sync, build, emulator) ..."
+  exec npx cap run android
+fi

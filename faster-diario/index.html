@@ -23,6 +23,11 @@
   <string id="menu_home">Inicio</string>
   <string id="menu_profile">Perfil</string>
   <string id="menu_logout">Cerrar sesión</string>
+  <string id="landing_title">FASTER Diario</string>
+  <string id="landing_subtitle">Elige una experiencia</string>
+  <string id="landing_faster">FASTER</string>
+  <string id="landing_sword">SWORD</string>
+  <string id="landing_devotionals">Devocionales</string>
   <string id="title_what_is_faster">¿Qué es F.A.S.T.E.R.?</string>
   <string id="desc_intro">La escala F.A.S.T.E.R. te ayuda a reconocer en qué punto te encuentras en tu camino de restauración. Cada letra representa una etapa de deterioro; la primera (Restauración) es el estado ideal. Revisa los pilares con honestidad para identificar áreas que necesitan atención.</string>
   <string id="faster_f">F — Forgetting Priorities (Olvidar prioridades)</string>
@@ -205,6 +210,11 @@
   <string id="menu_home">Home</string>
   <string id="menu_profile">Profile</string>
   <string id="menu_logout">Log out</string>
+  <string id="landing_title">FASTER Diario</string>
+  <string id="landing_subtitle">Choose an experience</string>
+  <string id="landing_faster">FASTER</string>
+  <string id="landing_sword">SWORD</string>
+  <string id="landing_devotionals">Devotionals</string>
   <string id="title_what_is_faster">What is F.A.S.T.E.R.?</string>
   <string id="desc_intro">The F.A.S.T.E.R. scale helps you recognize where you are on your restoration journey. Each letter represents a stage of decline; the first (Restoration) is the ideal state. Review the pillars honestly to identify areas that need attention.</string>
   <string id="faster_f">F — Forgetting Priorities</string>
@@ -376,6 +386,22 @@
   <string id="cb_relapse_5">I have returned to behaviors I promised not to return to</string>
   <string id="cb_relapse_6">I have decided to run my life on my own terms instead of trusting God</string>
 </strings></script>
+  <div id="view-login" class="app-view login-screen">
+    <div class="login-card">
+      <h1 class="login-app-title">FASTER Diario</h1>
+      <p class="login-sub">Sign in to continue</p>
+      <!-- No HTTP method: static servers (e.g. python http.server) return 501 on POST. Auth is client-only via JS + HardcodedAuthService. -->
+      <form id="login-form" onsubmit="return false;" autocomplete="on">
+        <label class="login-field">Username <input name="username" type="text" autocomplete="username" /></label>
+        <label class="login-field">Password <input name="password" type="password" autocomplete="current-password" /></label>
+        <p id="login-error" class="login-error hidden" role="alert"></p>
+        <button type="button" class="btn-login" id="login-submit">Sign in</button>
+      </form>
+      <p class="login-hint">Demo: admin / admin1 or user / user1</p>
+    </div>
+  </div>
+
+  <div id="view-app" class="app-root hidden">
   <header class="toolbar" role="toolbar">
     <div class="toolbar-left">
       <div class="options-menu-wrap">
@@ -398,6 +424,22 @@
       </select>
     </div>
   </header>
+
+  <button type="button" id="floating-back" class="floating-back hidden" aria-label="Back" title="Back">
+    <span class="floating-back-icon" aria-hidden="true">←</span>
+  </button>
+
+  <section id="view-landing" class="feature-view landing-view active" aria-label="Home">
+    <h1 class="landing-brand" id="landing-title" data-i18n="landing_title">FASTER Diario</h1>
+    <p class="landing-subtitle" id="landing-subline" data-i18n="landing_subtitle">Choose an experience</p>
+    <div class="landing-actions">
+      <button type="button" class="landing-tile landing-tile-faster" id="landing-faster" data-i18n="landing_faster">FASTER</button>
+      <button type="button" class="landing-tile landing-tile-sword" id="landing-sword" data-i18n="landing_sword">SWORD</button>
+      <button type="button" class="landing-tile landing-tile-devotionals" id="landing-devotionals" data-i18n="landing_devotionals">Devotionals</button>
+    </div>
+  </section>
+
+  <div id="view-faster" class="feature-view">
   <h1 id="app-title">F.A.S.T.E.R.</h1>
 
   <div class="step-frame" id="step-frame">
@@ -630,6 +672,40 @@
     </div>
     <button type="button" class="step-arrow step-next next-btn" aria-label="Next">›</button>
   </div>
+  </div>
+
+  <section id="view-sword" class="feature-view" aria-label="SWORD devotional">
+    <h2 class="feature-heading">SWORD</h2>
+    <p class="description">Choose a devotional for the S–W–O–R–D flow. Content loads from <code>data/sword-devotionals.json</code>.</p>
+    <div id="sword-error" class="sword-error hidden" role="alert"></div>
+    <h3 class="subheading">Saved sessions</h3>
+    <div id="sword-sessions"></div>
+    <h3 class="subheading">Start</h3>
+    <div id="sword-list" class="sword-pick-list"></div>
+    <div id="sword-wizard" class="sword-wizard hidden">
+      <div id="sword-step-content"></div>
+      <div class="nav-buttons">
+        <button type="button" id="sword-back">Back</button>
+        <button type="button" id="sword-next">Next</button>
+        <button type="button" id="sword-save">Save session</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-podcasts" class="feature-view" aria-label="Podcasts">
+    <h2 class="feature-heading">Podcasts</h2>
+    <div id="podcasts-content"></div>
+  </section>
+
+  <section id="view-bible" class="feature-view" aria-label="Bible">
+    <h2 class="feature-heading">Bible</h2>
+    <p class="description">Multi-version reading will use your configured Bible provider (<code>IBibleContentProvider</code>).</p>
+  </section>
+
+  <section id="view-profile" class="feature-view" aria-label="Profile">
+    <h2 class="feature-heading">Profile</h2>
+    <p id="profile-placeholder" class="description">Preferences will appear here.</p>
+  </section>
 
   <div id="message-overlay" class="message-overlay">
     <div id="message-box" class="message-box">
@@ -645,6 +721,8 @@
     </div>
   </div>
 
-  <script src="scripts/app.js"></script>
+  </div>
+
+  <script type="module" src="scripts/shell/main.js"></script>
 </body>
 </html>

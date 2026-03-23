@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+#
+# =============================================================================
+# Local web dev — ONE command after you change the app
+# =============================================================================
+#
+# Run from the project root (this directory):
+#   ./start
+#
+# This script does everything needed to refresh www/ and serve it:
+#
+#   1. Free PORT (default 8080) if something is already listening — runs ./stop
+#   2. npm run copy-web
+#        • npm run build  → TypeScript (src/) → dist/
+#        • node scripts/copy-www.js
+#            → copies index.html, theme/, lang/, data/, dist/* → www/
+#      After ANY change to: src/, index.html, theme/, lang/, data/, tsconfig
+#      you only need ./start again (or ./stop && ./start) to see updates.
+#
+#   3. python3 -m http.server in www/ (background), writes .dev-server.pid
+#
+# Optional env:
+#   PORT=9000 ./start          — use another port
+#   OPEN_BROWSER=0 ./start     — do not open the browser (default on macOS: open)
+#
+# Not included (use when you work on native shells):
+#   npx cap sync               — run ./update.sh or npm run cap-sync separately
+#
+# =============================================================================
+
+set -e
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+cd "$ROOT"
+PORT="${PORT:-8080}"
+STOP_SCRIPT="$ROOT/stop"
+
+if command -v lsof >/dev/null 2>&1; then
+  if lsof -ti ":$PORT" >/dev/null 2>&1; then
+    echo "Port $PORT is in use — running stop to free it..."
+    bash "$STOP_SCRIPT" || true
+    sleep 0.5
+  fi
+fi
+
+if [[ ! -d "$ROOT/www" ]]; then
+  echo "Error: www/ not found. Run from faster-diario project root." >&2
+  exit 1
+fi
+
+echo "→ npm run copy-web (tsc + copy assets to www/) ..."
+npm run copy-web
+
+cd "$ROOT/www"
+echo "→ Starting http.server on port $PORT (background) ..."
+python3 -m http.server "$PORT" &
+echo $! > "$ROOT/.dev-server.pid"
+
+URL="http://localhost:$PORT"
+echo ""
+echo "  Web app:  $URL"
+echo "  PID:      $(cat "$ROOT/.dev-server.pid")"
+echo "  Stop:     ./stop"
+echo ""
+
+# Open browser on macOS unless disabled
+if [[ "$(uname -s)" == "Darwin" ]] && [[ "${OPEN_BROWSER:-1}" != "0" ]]; then
+  sleep 0.2
+  open "$URL" 2>/dev/null || true
+fi
