@@ -10,7 +10,11 @@
     "android": "bash scripts/android",
     "ios": "bash scripts/ios",
     "test:unit": "vitest run",
-    "test:unit:watch": "vitest"
+    "test:unit:watch": "vitest",
+    "test:unit:coverage": "vitest run --coverage",
+    "test:integration": "playwright test",
+    "test:integration:ui": "playwright test --ui",
+    "test": "npm run test:unit && npm run test:integration"
   },
   "dependencies": {
     "@capacitor/android": "8.1.0",
@@ -21,6 +25,10 @@
     "@capacitor/preferences": "8.0.1"
   },
   "devDependencies": {
+    "@playwright/test": "1.57.0",
+    "@vitest/coverage-v8": "4.1.0",
+    "happy-dom": "20.0.11",
+    "http-server": "14.1.1",
     "typescript": "5.9.3",
     "vitest": "4.1.0"
   }
